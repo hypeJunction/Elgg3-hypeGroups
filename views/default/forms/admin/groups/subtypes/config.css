@@ -1,0 +1,25 @@
+.groups-subtypes-config-module {
+	margin: 10px auto;
+	width: 100%;
+	border: 1px solid #f1f1f1;
+}
+
+.groups-subtypes-config-module > .elgg-head {
+	padding: 10px;
+	background: #f1f1f1;
+	color: #000;
+}
+.groups-subtypes-config-module > .elgg-body {
+	padding: 15px;
+}
+
+.groups-subtypes-config-module .elgg-field {
+	margin-bottom: 15px;
+}
+.groups-subtypes-config-module input[type="checkbox"] {
+	margin-right: 7px;
+}
+
+.groups-subtypes-config-module .elgg-input-checkboxes label {
+	font-weight: normal;
+}
