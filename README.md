@@ -9,6 +9,8 @@ Group Subtypes for Elgg
  * Admin interface for configuring root level and subgroup subtypes
  * Admin interface for creating groups with fixed tool presets
 
+![Group Subtypes](https://raw.github.com/hypeJunction/Elgg-group_subtypes/master/screenshots/group_subtypes.png "Admin Interface for managing group subtypes")
+
 ## Description
 
 The plugin provides high level hooks and some preliminary UI for introducing group subtypes,
