@@ -55,6 +55,7 @@ function group_subtypes_init() {
 			}
 
 			foreach ($hooks['route']['groups'] as $priority => $callbacks) {
+				$callbacks = (array) $callbacks;
 				foreach ($callbacks as $callback) {
 					elgg_register_plugin_hook_handler('route', $identifier, $callback, $priority);
 				}
