@@ -29,3 +29,7 @@ on both functionalities.
  * `'list_subtypes',$identifier` - filters group subtypes to be displayed on an `$identifier` page
  * `'page_identifier',"$type:$subtype"` - filter the route page identifier for a group of given type and subtype
  * `'permissions_check:parent','group'` - filter the permission for a parent entity to have the group as a child
+
+## Acknowledgements
+
+This plugin has been sponsored by [IvyTies.com](http://www.ivyties.com) - a social network platform for college admissions
