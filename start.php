@@ -8,7 +8,7 @@
  */
 require_once __DIR__ . '/autoloader.php';
 
-elgg_register_event_handler('init', 'system', 'group_subtypes_init');
+elgg_register_event_handler('init', 'system', 'group_subtypes_init', 900);
 
 /**
  * Initialize the plugin
