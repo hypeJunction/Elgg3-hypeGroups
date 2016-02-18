@@ -1,6 +1,6 @@
 {
 	"name": "group_subtypes",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"license": "GPL-2.0",
 	"repository": {
 		"type": "git",
@@ -18,7 +18,7 @@
 		"grunt-conventional-changelog": "^5.0.0",
 		"grunt-gh-release": "0.0.2",
 		"grunt-git": "^0.3.5",
-		"grunt-version": "^0.0.0",
+		"grunt-version": "^1.0.0",
 		"underscore": "^1.8.3"
 	}
 }
