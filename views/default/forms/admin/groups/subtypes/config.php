@@ -1,14 +1,12 @@
 <?php
 
 $config = group_subtypes_get_config();
-if (empty($config)) {
-	$dbprefix = elgg_get_config('dbprefix');
-	$query = "SELECT subtype FROM {$dbprefix}entity_subtypes WHERE type = 'group'";
-	$data = get_data($query);
-	if (!$data) {
-		return;
-	}
-	foreach ($data as $row) {
+
+$dbprefix = elgg_get_config('dbprefix');
+$query = "SELECT subtype FROM {$dbprefix}entity_subtypes WHERE type = 'group'";
+$data = get_data($query);
+foreach ($data as $row) {
+	if (!isset($config[$row->subtype])) {
 		$config[$row->subtype] = array();
 	}
 }
