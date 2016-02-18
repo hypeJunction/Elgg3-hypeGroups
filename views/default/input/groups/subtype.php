@@ -9,24 +9,15 @@ if (!$parent_guid) {
 
 $parent = get_entity($parent_guid);
 
-$options_values = array();
-$subtypes = get_registered_entity_types('group');
-
-foreach ($subtypes as $subtype) {
-	$params = array(
-		'parent' => $parent,
-		'type' => 'group',
-		'subtype' => $subtype,
-	);
-	$can_parent = elgg_trigger_plugin_hook('permissions_check:parent', 'group', $params, true);
-	if ($can_parent) {
-		$options_values[$subtype] = elgg_echo("group:$subtype");
-	}
-}
-
-if (empty($options_values)) {
+$subtypes = group_subtypes_get_allowed_subtypes_for_parent($parent);
+if (empty($subtypes)) {
 	echo elgg_format_element('p', ['class' => 'elgg-no-results'], elgg_echo("$identifier:no_allowed_subtypes"));
 	return;
+}
+
+$options_values = array();
+foreach ($subtypes as $subtype) {
+	$options_values[$subtype] = elgg_echo("group:$subtype");
 }
 
 echo elgg_view('input/select', array(

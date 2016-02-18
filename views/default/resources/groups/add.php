@@ -29,6 +29,17 @@ $vars['subtype'] = $subtype;
 
 elgg_set_page_owner_guid($parent_guid);
 
+if (!$subtype) {
+	$allowed_subtypes = group_subtypes_get_allowed_subtypes_for_parent($parent);
+	if (empty($allowed_subtypes)) {
+		register_error(elgg_echo("$identifier:no_allowed_subtypes"));
+		forward(REFERRER);
+	}
+	if (count($allowed_subtypes) == 1) {
+		$subtype = $allowed_subtypes[0];
+	}
+}
+
 if ($subtype) {
 	// can write to container ignores hierarchy logic
 	$params = array(

@@ -16,11 +16,11 @@ elgg_register_event_handler('init', 'system', 'group_subtypes_init');
  */
 function group_subtypes_init() {
 
-		// Search
+	// Search
 	elgg_unregister_entity_type('group', '');
 	elgg_unregister_plugin_hook_handler('search', 'group', 'search_groups_hook');
 	elgg_register_plugin_hook_handler('search', 'group', 'group_subtypes_search_hook');
-	
+
 	elgg_register_plugin_hook_handler('route', 'groups', 'group_subtypes_route_edit_pages');
 
 	$hooks = _elgg_services()->hooks->getAllHandlers();
@@ -79,7 +79,6 @@ function group_subtypes_init() {
 	elgg_register_action('admin/groups/subtypes/config', __DIR__ . '/actions/admin/groups/subtypes/config.php', 'admin');
 	elgg_register_action('admin/groups/subtypes/change_subtype', __DIR__ . '/actions/admin/groups/subtypes/change_subtype.php', 'admin');
 	elgg_extend_view('admin.css', 'forms/admin/groups/subtypes/config.css');
-
 }
 
 /**
@@ -408,4 +407,28 @@ function group_subtypes_search_hook($hook, $type, $value, $params) {
 		'entities' => $entities,
 		'count' => $count,
 	);
+}
+
+/**
+ * Returns an array of group subtypes that can be added to the parent
+ *
+ * @param ElggEntity $parent Parent entity
+ * @return array
+ */
+function group_subtypes_get_allowed_subtypes_for_parent($parent = null) {
+	$allowed_subtypes = array();
+	$subtypes = get_registered_entity_types('group');
+	foreach ($subtypes as $subtype) {
+		$params = array(
+			'parent' => $parent,
+			'type' => 'group',
+			'subtype' => $subtype,
+		);
+		$can_parent = elgg_trigger_plugin_hook('permissions_check:parent', 'group', $params, true);
+		if ($can_parent) {
+			$allowed_subtypes[] = $subtype;
+		}
+	}
+
+	return $allowed_subtypes;
 }
