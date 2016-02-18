@@ -179,6 +179,10 @@ function group_subtypes_get_identifier(ElggGroup $entity) {
  * @return array
  */
 function group_subtypes_router($hook, $type, $return, $params) {
+	if (!is_array($return)) {
+		return;
+	}
+	
 	$segments = elgg_extract('segments', $return);
 	return array(
 		'identifier' => 'groups',
