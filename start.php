@@ -285,14 +285,22 @@ function group_subtypes_can_parent($hook, $type, $return, $params) {
  */
 function group_subtypes_update_fields_config($hook, $type, $return, $params) {
 
-	if (get_input('group_guid')) {
-		// not a new group
-		return;
+	$fields = elgg_get_config('group');
+
+	$guid = get_input('group_guid');
+	$entity = get_entity($guid);
+	if ($entity) {
+		$subtype = $entity->getSubtype();
+	} else {
+		$subtype = get_input('subtype');
+		if ($subtype) {
+			// only add subtype to group fields if it's a new entity
+			$fields['subtype'] = 'hidden';
+		}
 	}
 
-	$fields = elgg_get_config('group');
-	if ($subtype = get_input('subtype')) {
-		$fields['subtype'] = 'hidden';
+	if ($subtype) {
+		// apply subtype tool presets
 		$conf = group_subtypes_get_config();
 		if ($conf[$subtype]['preset_tools']) {
 			$tools = elgg_get_config('group_tool_options');
