@@ -80,6 +80,10 @@ function group_subtypes_init() {
 	elgg_register_action('admin/groups/subtypes/config', __DIR__ . '/actions/admin/groups/subtypes/config.php', 'admin');
 	elgg_register_action('admin/groups/subtypes/change_subtype', __DIR__ . '/actions/admin/groups/subtypes/change_subtype.php', 'admin');
 	elgg_extend_view('admin.css', 'forms/admin/groups/subtypes/config.css');
+
+	// Group tools
+	elgg_unextend_view("groups/edit", "group_tools/group_edit_tabbed", 1);
+	elgg_unextend_view("groups/edit", "group_tools/group_edit_tabbed_js", 999999999);
 }
 
 /**
