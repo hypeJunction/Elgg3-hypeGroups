@@ -82,8 +82,11 @@ function group_subtypes_init() {
 	elgg_extend_view('admin.css', 'forms/admin/groups/subtypes/config.css');
 
 	// Group tools
-	elgg_unextend_view("groups/edit", "group_tools/group_edit_tabbed", 1);
-	elgg_unextend_view("groups/edit", "group_tools/group_edit_tabbed_js", 999999999);
+	if (elgg_is_active_plugin('group_tools')) {
+		elgg_unextend_view("groups/edit", "group_tools/group_edit_tabbed", 1);
+		elgg_unextend_view("groups/edit", "group_tools/group_edit_tabbed_js", 999999999);
+		elgg_extend_view('css/elgg', 'forms/groups/edit/group_tools.css');
+	}
 }
 
 /**
