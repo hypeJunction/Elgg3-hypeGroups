@@ -120,7 +120,7 @@ function group_subtypes_route_edit_pages($hook, $type, $return, $params) {
 	if (!is_array($return)) {
 		return;
 	}
-	
+
 	$initial_identifier = elgg_extract('identifier', $params, 'groups');
 	$identifier = elgg_extract('identifier', $return);
 	$segments = elgg_extract('segments', $return);
@@ -189,7 +189,7 @@ function group_subtypes_router($hook, $type, $return, $params) {
 	if (!is_array($return)) {
 		return;
 	}
-	
+
 	$segments = elgg_extract('segments', $return);
 	return array(
 		'identifier' => 'groups',
@@ -305,12 +305,12 @@ function group_subtypes_update_fields_config($hook, $type, $return, $params) {
 	if ($subtype) {
 		// apply subtype tool presets
 		$conf = group_subtypes_get_config();
-		if ($conf[$subtype]['preset_tools']) {
-			$tools = elgg_get_config('group_tool_options');
-			if ($tools) {
-				foreach ($tools as $group_option) {
-					$option_name = $group_option->name . "_enable";
-					$option_value = in_array($group_option->name, $conf[$subtype]['tools']) ? 'yes' : 'no';
+		$tools = elgg_get_config('group_tool_options');
+		if ($tools) {
+			foreach ($tools as $group_option) {
+				$option_name = $group_option->name . "_enable";
+				$option_value = in_array($group_option->name, $conf[$subtype]['tools']) ? 'yes' : 'no';
+				if (empty(get_input($option_name))) {
 					set_input($option_name, $option_value);
 				}
 			}
