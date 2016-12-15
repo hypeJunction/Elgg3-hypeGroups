@@ -52,7 +52,7 @@ if ($subtype) {
 		register_error(elgg_echo("$identifier:illegal_subtype", array(elgg_echo("item:group:$subtype"))));
 		forward(REFERRER);
 	}
-
+	
 	group_subtypes_configure_tools($subtype);
 	$title = elgg_echo("$identifier:add:$subtype");
 	$content = elgg_view('groups/edit/index', $vars);

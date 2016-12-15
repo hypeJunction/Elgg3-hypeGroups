@@ -1,0 +1,4 @@
+/* js for tabs has been disabled, so need to show the forms */
+.group-tools-group-edit-section.hidden {
+	display: block;
+}
