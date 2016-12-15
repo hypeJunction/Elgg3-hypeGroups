@@ -24,9 +24,6 @@ if (!$parent || !$parent->canWriteToContainer(0, 'group', $subtype)) {
 // pushing context to make it easier to user 'menu:filter' hook
 elgg_push_context("$identifier/add");
 
-$vars['parent_guid'] = $parent->guid;
-$vars['subtype'] = $subtype;
-
 elgg_set_page_owner_guid($parent_guid);
 
 if (!$subtype) {
@@ -39,6 +36,9 @@ if (!$subtype) {
 		$subtype = $allowed_subtypes[0];
 	}
 }
+
+$vars['parent_guid'] = $parent->guid;
+$vars['subtype'] = $subtype;
 
 if ($subtype) {
 	// can write to container ignores hierarchy logic
