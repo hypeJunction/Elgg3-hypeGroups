@@ -1,3 +1,15 @@
+<a name="1.0.3"></a>
+## [1.0.3](https://github.com/hypeJunction/Elgg-group_subtypes/compare/1.0.2...v1.0.3) (2016-12-15)
+
+
+### Bug Fixes
+
+* **css:** make sure form elements are visible if group tools are enabled ([dbec5fb](https://github.com/hypeJunction/Elgg-group_subtypes/commit/dbec5fb))
+* **forms:** correctly populate subtype values when only one subtype is allowed ([69991e0](https://github.com/hypeJunction/Elgg-group_subtypes/commit/69991e0))
+* **tools:** respect preconfigured tool sets ([a224d19](https://github.com/hypeJunction/Elgg-group_subtypes/commit/a224d19))
+
+
+
 <a name="1.0.2"></a>
 ## 1.0.2 (2016-02-22)
 
