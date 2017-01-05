@@ -37,6 +37,11 @@ foreach ($params as $subtype => $options) {
 				$group->{"{$tool}_enable"} = 'no';
 			}
 		}
+		if ($options['preset_tools']) {
+			foreach ($options['tools'] as $tool) {
+				$group->{"{$tool}_enable"} = 'yes';
+			}
+		}
 	}
 }
 
