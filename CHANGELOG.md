@@ -1,3 +1,14 @@
+<a name="1.0.4"></a>
+## [1.0.4](https://github.com/hypeJunction/Elgg-group_subtypes/compare/1.0.3...v1.0.4) (2017-01-05)
+
+
+### Bug Fixes
+
+* **tools:** disable tools on all group of a subtype based on admin setting ([ee8df5f](https://github.com/hypeJunction/Elgg-group_subtypes/commit/ee8df5f))
+* **tools:** enable all tools if subtype has preset tools ([d4dfb9c](https://github.com/hypeJunction/Elgg-group_subtypes/commit/d4dfb9c))
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/hypeJunction/Elgg-group_subtypes/compare/1.0.2...v1.0.3) (2016-12-15)
 
