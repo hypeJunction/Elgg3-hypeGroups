@@ -43,7 +43,7 @@ $options = elgg_extract('options', $vars);
 		<?php
 		$tools = (array) elgg_get_config("group_tool_options");
 		usort($tools, create_function('$a, $b', 'return strcmp($a->label, $b->label);'));
-		$tool_opitons = array();
+		$tool_options = array();
 		foreach ($tools as $tool) {
 			$tool_options[$tool->name] = $tool->label;
 		}
