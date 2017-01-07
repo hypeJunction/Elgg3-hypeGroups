@@ -94,6 +94,9 @@ function group_subtypes_init() {
 
 	// Menus
 	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'group_subtypes_replace_owner_block_labels', 999);
+
+	// Modules
+	elgg_register_plugin_hook_handler('view_vars', 'groups/profile/module', 'groups_subtypes_replace_group_module_title', 999);
 }
 
 /**
@@ -505,4 +508,33 @@ function group_subtypes_replace_owner_block_labels($hook, $type, $return, $param
 	}
 
 	return $return;
+}
+
+/**
+ * Replace group profile module title
+ *
+ * @param string $hook   "view_vars"
+ * @param string $type   "groups/profile/module"
+ * @param array  $vars   View vars
+ * @param array  $params Hook params
+ * @return array
+ */
+function groups_subtypes_replace_group_module_title($hook, $type, $vars, $params) {
+
+	$route = _elgg_services()->request->getUrlSegments();
+	$context = array_shift($route);
+
+	if ($context == 'groups') {
+		return;
+	}
+
+	$group_str = elgg_echo('groups:group');
+	$groups_str = elgg_echo('item:group');
+
+	$title = elgg_extract('title', $vars, '');
+	$title = preg_replace("/{$group_str}|{$groups_str}/i", '', $title);
+	$title = ucfirst(trim($title, ' '));
+	$vars['title'] = $title;
+
+	return $vars;
 }
