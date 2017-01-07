@@ -91,6 +91,9 @@ function group_subtypes_init() {
 		elgg_unextend_view("groups/edit", "group_tools/group_edit_tabbed_js", 999999999);
 		elgg_extend_view('css/elgg', 'forms/groups/edit/group_tools.css');
 	}
+
+	// Menus
+	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'group_subtypes_replace_owner_block_labels', 999);
 }
 
 /**
@@ -200,7 +203,7 @@ function group_subtypes_router($hook, $type, $return, $params) {
 		$tools = elgg_get_config('group_tool_options');
 		// Namespace tool options
 		foreach ($tools as $key => $tool) {
-			$tool->label = elgg_echo("$identifier:tools:$tool->name");
+			$tool->label = elgg_echo("$identifier:tools:$tool->name:label");
 			// Let group options prevail. Do not enable anything by default
 			$tool->default_on = false;
 			$tools[$key] = $tool;
@@ -473,4 +476,33 @@ function group_subtypes_get_allowed_subtypes_for_parent($parent = null) {
 	}
 
 	return $allowed_subtypes;
+}
+
+/**
+ * Replaces owner block labels with type specific strings
+ * 
+ * @param string $hook   "register"
+ * @param string $type   "menu:owner_block"
+ * @param array  $return Menu
+ * @param array  $params Hook params
+ * @return array
+ */
+function group_subtypes_replace_owner_block_labels($hook, $type, $return, $params) {
+
+	$entity = elgg_extract('entity', $params);
+	if (!$entity instanceof ElggGroup) {
+		return;
+	}
+
+	$identifier = group_subtypes_get_identifier($entity) ? : 'groups';
+	if ($identifier == 'groups') {
+		return;
+	}
+
+	foreach ($return as $key => $item) {
+		$item->setText(elgg_echo("$identifier:tools:{$item->getName()}"));
+		$return[$key] = $item;
+	}
+
+	return $return;
 }
