@@ -31,6 +31,10 @@ function group_subtypes_init() {
 
 		elgg_register_entity_type('group', $subtype);
 
+		// If a custom form/action has been setup for the subtype,
+		// apply custom tools logic
+		elgg_register_plugin_hook_handler('action', "groups/edit/$subtype", 'group_subtypes_update_fields_config');
+
 		$identifier = elgg_extract('identifier', $options, 'groups');
 		if (in_array($identifier, $identifiers)) {
 			continue;
@@ -188,6 +192,20 @@ function group_subtypes_get_identifier(ElggGroup $entity) {
 function group_subtypes_router($hook, $type, $return, $params) {
 	if (!is_array($return)) {
 		return;
+	}
+
+	// Get original identifier
+	$identifier = elgg_extract('identifier', $params);
+	if ($identifier !== 'groups') {
+		$tools = elgg_get_config('group_tool_options');
+		// Namespace tool options
+		foreach ($tools as $key => $tool) {
+			$tool->label = elgg_echo("$identifier:tools:$tool->name");
+			// Let group options prevail. Do not enable anything by default
+			$tool->default_on = false;
+			$tools[$key] = $tool;
+		}
+		elgg_set_config('group_tool_options', $tools);
 	}
 
 	$segments = elgg_extract('segments', $return);
