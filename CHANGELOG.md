@@ -1,3 +1,15 @@
+<a name="1.0.5"></a>
+## [1.0.5](https://github.com/hypeJunction/Elgg-group_subtypes/compare/1.0.4...v1.0.5) (2017-01-08)
+
+
+### Bug Fixes
+
+* **tools:** fix handling of tool options with custom subtypes ([baabc9c](https://github.com/hypeJunction/Elgg-group_subtypes/commit/baabc9c))
+* **tools:** remove Group from group module labels on group subtype pages ([389fcde](https://github.com/hypeJunction/Elgg-group_subtypes/commit/389fcde))
+* **tools:** replace owner block menu labels with group subtype specific labels ([3f58244](https://github.com/hypeJunction/Elgg-group_subtypes/commit/3f58244))
+
+
+
 <a name="1.0.4"></a>
 ## [1.0.4](https://github.com/hypeJunction/Elgg-group_subtypes/compare/1.0.3...v1.0.4) (2017-01-05)
 
