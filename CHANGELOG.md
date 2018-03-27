@@ -1,3 +1,13 @@
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.0...2.0.1) (2018-03-27)
+
+
+### Bug Fixes
+
+* **manifest:** document suggestions ([b8cedfe](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/commit/b8cedfe))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/1.0.5...2.0.0) (2018-03-27)
 
