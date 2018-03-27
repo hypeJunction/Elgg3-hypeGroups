@@ -1,3 +1,13 @@
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.1...2.0.2) (2018-03-27)
+
+
+### Bug Fixes
+
+* **composer:** add installer name ([1aa91cb](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/commit/1aa91cb))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.0...2.0.1) (2018-03-27)
 
