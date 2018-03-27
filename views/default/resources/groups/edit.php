@@ -1,30 +1,45 @@
 <?php
 
-elgg_gatekeeper();
-
-$identifier = elgg_extract('identifier', $vars, 'groups');
-$segments = elgg_extract('segments', $vars);
-
 $guid = elgg_extract('guid', $vars);
-$group = get_entity($guid);
-$vars['entity'] = $group;
+elgg_entity_gatekeeper($guid, 'group');
 
-if (!$group instanceof ElggGroup || !$group->canEdit()) {
-	register_error(elgg_echo('groups:noaccess'));
-	forward(REFERRER);
+$entity = get_entity($guid);
+if (!$entity instanceof \ElggEntity) {
+	throw new \Elgg\BadRequestException();
 }
 
-// pushing context to make it easier to user 'menu:filter' hook
-elgg_push_context("$identifier/edit");
-
-elgg_load_library('elgg:groups');
-
-elgg_set_page_owner_guid($group->guid);
-group_subtypes_configure_tools($group->getSubtype());
-
-$tab = array_shift($segments);
-if (!$tab || !elgg_view_exists("resources/groups/edit/$tab")) {
-	$tab = 'index';
+if (!$entity->canEdit()) {
+	throw new \Elgg\EntityPermissionsException();
 }
 
-echo elgg_view_resource("groups/edit/$tab", $vars);
+elgg_push_entity_breadcrumbs($entity);
+elgg_push_breadcrumb($title);
+
+$subtype = $entity->getSubtype();
+
+if (elgg_action_exists("groups/edit/$subtype")) {
+	$action = "groups/edit/$subtype";
+} else {
+	$action = "groups/edit";
+}
+
+$content = elgg_view_form('post/save', [
+	'enctype' => 'multipart/form-data',
+	'class' => 'post-form',
+	'actions' => elgg_generate_action_url($action),
+], elgg()->{'posts.model'}->getFormVars($entity, $vars));
+
+if (elgg_is_xhr()) {
+	echo $content;
+	return;
+}
+
+$layout = elgg_view_layout('default', [
+	'header' => false,
+	'content' => $content,
+	'sidebar' => false,
+	'filter' => $action,
+	'target' => $entity,
+]);
+
+echo elgg_view_page($entity->getDisplayName(), $layout);

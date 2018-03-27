@@ -1,0 +1,14 @@
+.elgg-module-group > .elgg-head .elgg-badge {
+	background: $(background-color-highlight);
+	color: #fff;
+	margin-left: 0.5rem;
+	padding: 2px 7px;
+}
+
+.elgg-module-group {
+	margin-bottom: 1rem;
+}
+
+.elgg-module-group .elgg-gallery-users {
+	justify-content: flex-start;
+}

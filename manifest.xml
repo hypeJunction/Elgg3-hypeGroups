@@ -1,26 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
 
-	<name>Group Subtypes</name>
-	<id>group_subtypes</id>
+	<name>hypeGroups</name>
+	<id>hypeGroups</id>
 
-	<description>Group Subtypes</description>
+	<description>Extended group functionality</description>
 	<category>groups</category>
 	<version type="dist">1.0.5</version>
 
 	<author>Ismayil Khayredinov (inof@hypejunction.com)</author>
 	<website>http://www.hypejunction.com/</website>
-	<copyright>(c) 2015 Ismayil Khayredinov</copyright>
+	<copyright>(c) 2015-2018 Ismayil Khayredinov</copyright>
 	<license>GNU General Public License version 2</license>
 
 	<requires>
 		<type>elgg_release</type>
-		<version>2.0</version>
+		<version>3.0</version>
 	</requires>
 
 	<requires>
 		<type>plugin</type>
 		<name>groups</name>
+        <priority>before</priority>
 	</requires>
-	
+
+    <requires>
+        <type>plugin</type>
+        <name>hypeLists</name>
+    </requires>
+
+    <requires>
+        <type>plugin</type>
+        <name>hypePost</name>
+    </requires>
+
+    <requires>
+        <type>plugin</type>
+        <name>hypeAutocomplete</name>
+    </requires>
+
 </plugin_manifest>

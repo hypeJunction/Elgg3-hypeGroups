@@ -1,31 +1,28 @@
 <?php
 
 return [
-	
-	'admin:groups:subtypes' => 'Subtypes',
-	'admin:groups:subtypes:add' => 'Add new subtype',
-	'admin:groups:subtypes:name' => 'Subtype name',
-	'admin:groups:subtypes:add:success' => 'New group subtype has been added',
-	'admin:groups:subtypes:add:error' => 'Subtype was not added',
 
-	'admin:groups:subtypes:identifier' => 'Page Identifier',
-	'admin:groups:subtypes:root' => 'Allowed at root level',
-	'admin:groups:subtypes:parents' => 'Allowed as a subgroup of',
-	'admin:groups:subtypes:preset_tools' => 'Fixed tools (group owners can not enable or disable avaiable tools)',
-	'admin:groups:subtypes:tools' => 'Available Tools',
-	'admin:groups:subtypes:config:saved' => 'Subtype settings have been saved',
-	
-	'admin:groups:subtypes:change_subtype' => 'Assign group subtype',
-	'admin:groups:subtypes:change_subtype:success' => 'Subtype has been assigned to %s groups',
+	'sort:group:filter:placeholder' => 'Select ...',
+	'sort:group:filter:all' => 'All',
+	'sort:group:filter:is_administered_by' => 'Groups I own',
+	'sort:group:filter:is_member' => 'Groups I joined',
 
-	'groups:illegal_parent' => 'You are not allowed to create a new group here',
-	'groups:illegal_subtype' => '%s can not be added here',
-	'groups:no_allowed_subtypes' => 'There are no registered group types allowed here',
-	'groups:add:select_subtype' => 'Select group type',
-	'groups:add:select_subtype:continue' => 'Continue',
+	'add:group' => 'New Group',
+	'edit:group' => 'Edit Group',
 
-	'groups:edit:index' => 'Profile',
-	'groups:edit:settings' => 'Settings',
-	'groups:settings_no_results' => 'This group does not have additional settings at the moment',
+	'field:group:name' => 'Name',
+	'field:group:description' => 'Description',
+	'field:group:briefdescription' => 'Short Description',
+	'field:group:interests' => 'Interests',
 
+	'groups:tool:blog' => 'Enable blog',
+
+	'groups:administrators' => 'Group Administrators',
+	'groups:administrators:help' => 'Select members that will have full administrator permissions over this group',
+
+	'groups:admins' => 'Admins',
+	'groups:members' => 'Members',
+
+	'add:group:group' => 'New Group',
+	'edit:group:group' => 'Edit Group',
 ];
