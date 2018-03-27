@@ -39,4 +39,9 @@
         <name>hypeAutocomplete</name>
     </requires>
 
+    <suggests>
+        <type>plugin</type>
+        <name>hypeActivity</name>
+    </suggests>
+
 </plugin_manifest>
