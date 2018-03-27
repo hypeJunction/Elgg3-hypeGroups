@@ -1,3 +1,13 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/1.0.5...2.0.0) (2018-03-27)
+
+
+### Features
+
+* **releases:** Elgg 3 rewrite ([da4f187](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/commit/da4f187))
+
+
+
 <a name="1.0.5"></a>
 ## [1.0.5](https://github.com/hypeJunction/Elgg-group_subtypes/compare/1.0.4...v1.0.5) (2017-01-08)
 
