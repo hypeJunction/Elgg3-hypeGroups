@@ -1,3 +1,13 @@
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.2...2.0.3) (2018-03-28)
+
+
+### Bug Fixes
+
+* **fields:** sync with new fields API ([2ecf6b3](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/commit/2ecf6b3))
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.1...2.0.2) (2018-03-27)
 
