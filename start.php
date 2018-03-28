@@ -39,7 +39,7 @@ return function () {
 		elgg_register_plugin_hook_handler('register', 'menu:owner_block', \hypeJunction\Groups\OwnerBlockMenu::class);
 		elgg_register_plugin_hook_handler('register', 'menu:entity', \hypeJunction\Groups\EntityMenu::class);
 
-		elgg_register_plugin_hook_handler('fields', 'group', \hypeJunction\Groups\Model::class, 100);
+		elgg_register_plugin_hook_handler('fields', 'group', \hypeJunction\Groups\SetGroupFields::class, 100);
 
 		elgg_register_plugin_hook_handler('tool_options', 'group', \hypeJunction\Groups\SetupGroupTools::class);
 

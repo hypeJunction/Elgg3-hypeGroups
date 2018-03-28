@@ -113,6 +113,8 @@ class GroupsService {
 			elgg_register_plugin_hook_handler('uses:comments', "group:$subtype", [\Elgg\Values::class, 'getFalse']);
 			elgg_register_plugin_hook_handler('uses:autosave', "group:$subtype", [\Elgg\Values::class, 'getFalse']);
 			elgg_register_plugin_hook_handler('uses:location', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
+			elgg_register_plugin_hook_handler('uses:icon', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
+			elgg_register_plugin_hook_handler('uses:cover', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
 
 			$identifier = $options->identifier;
 

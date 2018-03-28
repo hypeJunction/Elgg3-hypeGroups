@@ -4,7 +4,10 @@ if (!$entity instanceof \ElggEntity) {
 	return;
 }
 
-$fields = elgg()->{'posts.model'}->getProfileFields($entity, $vars);
+$svc = elgg()->{'posts.model'};
+/* @var $svc \hypeJunction\Post\Model */
+
+$fields = $svc->getFields($entity, \hypeJunction\Fields\Field::CONTEXT_PROFILE);
 
 $output = '';
 
@@ -14,7 +17,8 @@ $output .= elgg_view('output/longtext', [
 ]);
 
 foreach ($fields as $field) {
-	$output .= elgg_view("post/output/field", $field);
+	/* @var $field \hypeJunction\Fields\FieldInterface */
+	$output .= $field->output($entity);
 }
 
 echo $output;
