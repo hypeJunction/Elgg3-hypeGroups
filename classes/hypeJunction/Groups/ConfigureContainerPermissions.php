@@ -14,7 +14,7 @@ class ConfigureContainerPermissions {
 	 * @return bool
 	 */
 	public function __invoke(Hook $hook) {
-		if (elgg_get_plugin_setting('limited_groups', 'groups') && !elgg_is_admin_logged_in()) {
+		if (elgg_get_plugin_setting('limited_groups', 'groups') == 'yes' && !elgg_is_admin_logged_in()) {
 			return false;
 		}
 	}

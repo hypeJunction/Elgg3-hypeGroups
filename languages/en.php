@@ -25,4 +25,6 @@ return [
 
 	'add:group:group' => 'New Group',
 	'edit:group:group' => 'Edit Group',
+
+	'groups:profile:empty' => 'Get started by providing some more information about this group. %s',
 ];

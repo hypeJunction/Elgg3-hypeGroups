@@ -180,6 +180,16 @@ class GroupsService {
 				],
 			];
 
+			elgg_register_plugin_hook_handler('gatekeeper', "group:$subtype", function (Hook $hook) use ($subtype) {
+				// Allow access to group profile page
+
+				$route = $hook->getParam('route');
+
+				if ($route === 'view:group' || $route === "view:group:$subtype") {
+					return true;
+				}
+			});
+
 			foreach ($routes as $route_name => $route_options) {
 				elgg_register_route($route_name, $route_options);
 			}
@@ -417,7 +427,7 @@ class GroupsService {
 	 */
 	public function setGroupAdmins(\ElggGroup $group, array $admins = []) {
 		$current_admins = $this->getGroupAdmins($group, [
-			'callback' => function($e) {
+			'callback' => function ($e) {
 				return (int) $e->guid;
 			}
 		]);

@@ -21,4 +21,18 @@ foreach ($fields as $field) {
 	$output .= $field->output($entity);
 }
 
-echo $output;
+if (empty($output)) {
+	if ($entity->canEdit()) {
+		$edit = elgg_view('output/url', [
+			'href' => elgg_generate_entity_url($entity, 'edit'),
+			'text' => elgg_echo("edit:$entity->type:$entity->subtype"),
+			'icon_alt' => 'chevron-right',
+		]);
+		$message = elgg_echo('groups:profile:empty', [$edit]);
+		echo elgg_view_message('notice', $message, [
+			'title' => false,
+		]);
+	}
+} else {
+	echo $output;
+}

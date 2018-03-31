@@ -12,3 +12,28 @@
 .elgg-module-group .elgg-gallery-users {
 	justify-content: flex-start;
 }
+
+.groups-profile-fields {
+	border: 1px solid $(border-color-soft);
+	background: #fff;
+	display: grid;
+	grid-gap: 1rem;
+	grid-template-columns:  repeat(auto-fill, 50%);
+	padding: 1rem;
+}
+
+.groups-profile-fields> div {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.groups-profile-fields .groups-description {
+	grid-column: 1;
+	grid-column-end:  last;
+}
+
+.groups-profile-fields .maps-component {
+	grid-column: 1;
+	grid-column-end: last;
+}
