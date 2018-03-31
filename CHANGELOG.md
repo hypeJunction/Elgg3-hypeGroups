@@ -1,3 +1,13 @@
+<a name="2.0.4"></a>
+## [2.0.4](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.3...2.0.4) (2018-03-31)
+
+
+### Bug Fixes
+
+* **perms:** correctly setup permissions ([437e8c7](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/commit/437e8c7))
+
+
+
 <a name="2.0.3"></a>
 ## [2.0.3](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.2...2.0.3) (2018-03-28)
 
