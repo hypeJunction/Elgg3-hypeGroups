@@ -1,3 +1,13 @@
+<a name="2.0.5"></a>
+## [2.0.5](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.4...2.0.5) (2018-04-03)
+
+
+### Bug Fixes
+
+* **access:** fix group access settings ([db73c6d](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/commit/db73c6d))
+
+
+
 <a name="2.0.4"></a>
 ## [2.0.4](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.3...2.0.4) (2018-03-31)
 
