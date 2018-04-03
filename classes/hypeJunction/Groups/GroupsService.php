@@ -183,6 +183,11 @@ class GroupsService {
 			elgg_register_plugin_hook_handler('gatekeeper', "group:$subtype", function (Hook $hook) use ($subtype) {
 				// Allow access to group profile page
 
+				$entity = $hook->getEntityParam();
+				if (!has_access_to_entity($entity)) {
+					return;
+				}
+
 				$route = $hook->getParam('route');
 
 				if ($route === 'view:group' || $route === "view:group:$subtype") {

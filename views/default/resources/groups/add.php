@@ -25,7 +25,11 @@ $entity->container_guid = $container->guid;
 
 elgg_push_collection_breadcrumbs($type, $subtype, $container);
 
-$form_vars = elgg()->{'posts.model'}->getFormVars($entity, $vars);
+$svc = elgg()->{'posts.model'};
+/* @var $svc \hypeJunction\Post\Model */
+
+$vars = $svc->getFormVars($entity, $vars);
+$vars['context'] = \hypeJunction\Fields\Field::CONTEXT_CREATE_FORM;
 
 if (elgg_action_exists("groups/edit/$subtype")) {
 	$action = "groups/edit/$subtype";
@@ -37,7 +41,7 @@ $content = elgg_view_form('post/save', [
 	'enctype' => 'multipart/form-data',
 	'class' => 'post-form',
 	'action' => elgg_generate_action_url($action),
-], $form_vars);
+], $vars);
 
 if (elgg_is_xhr()) {
 	echo $content;

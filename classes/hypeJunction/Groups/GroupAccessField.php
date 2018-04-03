@@ -78,8 +78,9 @@ class GroupAccessField extends Field {
 		// is an odd requirement and should be removed. Either the acl creation happens
 		// in the action or the visibility moves to a plugin hook
 		if (elgg_get_plugin_setting('hidden_groups', 'groups') == 'yes') {
-			$value = elgg_extract('vis', $values);
-			if ($value !== null) {
+			$value = elgg_extract('access_id', $values);
+
+			if (isset($value)) {
 				$visibility = (int) $value;
 
 				if ($visibility == ACCESS_PRIVATE) {
@@ -87,6 +88,7 @@ class GroupAccessField extends Field {
 					// ACCESS_PRIVATE on the form and convert it to group_acl here
 					// because new groups do not have acl until they have been saved once.
 					$acl = _groups_get_group_acl($entity);
+
 					if ($acl) {
 						$visibility = $acl->id;
 					}
@@ -97,6 +99,8 @@ class GroupAccessField extends Field {
 
 				$entity->access_id = $visibility;
 			}
+		} else {
+			$entity->access_id = ACCESS_PUBLIC;
 		}
 	}
 

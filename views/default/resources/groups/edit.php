@@ -23,11 +23,17 @@ if (elgg_action_exists("groups/edit/$subtype")) {
 	$action = "groups/edit";
 }
 
+$svc = elgg()->{'posts.model'};
+/* @var $svc \hypeJunction\Post\Model */
+
+$vars = $svc->getFormVars($entity, $vars);
+$vars['context'] = \hypeJunction\Fields\Field::CONTEXT_EDIT_FORM;
+
 $content = elgg_view_form('post/save', [
 	'enctype' => 'multipart/form-data',
 	'class' => 'post-form',
 	'actions' => elgg_generate_action_url($action),
-], elgg()->{'posts.model'}->getFormVars($entity, $vars));
+], $vars);
 
 if (elgg_is_xhr()) {
 	echo $content;
