@@ -1,3 +1,13 @@
+<a name="2.0.6"></a>
+## [2.0.6](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.5...2.0.6) (2018-04-20)
+
+
+### Bug Fixes
+
+* **menus:** correctly construct menu items ([b8d8cdb](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/commit/b8d8cdb))
+
+
+
 <a name="2.0.5"></a>
 ## [2.0.5](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.4...2.0.5) (2018-04-03)
 
