@@ -1,33 +1,59 @@
 <?php
 
-/**
- * hypeGroups
- *
- * @author    Ismayil Khayredinov <info@hypejunction.com>
- * @copyright Copyright (c) 2015-2018, Ismayil Khayredinov
- */
-require_once __DIR__ . '/autoloader.php';
+namespace hypeJunction\Groups;
 
-return function () {
+use Elgg\Includer;
+use Elgg\PluginBootstrap;
 
-	$svc = elgg()->groups;
-	/* @var $svc \hypeJunction\Groups\GroupsService */
+class Bootstrap extends PluginBootstrap {
 
-	$svc->registerSubtype('group', [
-		'site_menu' => true,
-		'labels' => [
-			'en' => [
-				'item' => 'Group',
-				'collection' => 'Groups',
+	/**
+	 * Get plugin root
+	 * @return string
+	 */
+	protected function getRoot() {
+		return $this->plugin->getPath();
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function load() {
+		Includer::requireFileOnce($this->getRoot() . '/autoloader.php');
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function boot() {
+		$svc = elgg()->groups;
+		/* @var $svc \hypeJunction\Groups\GroupsService */
+
+		$svc->registerSubtype('group', [
+			'site_menu' => true,
+			'labels' => [
+				'en' => [
+					'item' => 'Group',
+					'collection' => 'Groups',
+				],
 			],
-		],
-		'root' => true,
-		'parents' => ['group'],
-		'identifier' => 'groups',
-	]);
+			'root' => true,
+			'parents' => ['group'],
+			'identifier' => 'groups',
+		]);
 
-	elgg_register_event_handler('init', 'system', function () {
+		elgg_register_event_handler('init', 'system', function () {
+			$svc = elgg()->groups;
+			/* @var $svc \hypeJunction\Groups\GroupsService */
 
+			$svc->setup();
+		}, 800);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function init() {
 		elgg_register_plugin_hook_handler('permissions_check', 'group', \hypeJunction\Groups\ConfigureEditPermissions::class);
 		elgg_register_plugin_hook_handler('container_permissions_check', 'group', \hypeJunction\Groups\ConfigureContainerPermissions::class);
 
@@ -45,12 +71,41 @@ return function () {
 
 		elgg_extend_view('groups/sidebar/members', 'groups/sidebar/admins', 100);
 		elgg_extend_view('groups/groups.css', 'groups/extras.css');
-	});
+	}
 
-	elgg_register_event_handler('init', 'system', function () {
-		$svc = elgg()->groups;
-		/* @var $svc \hypeJunction\Groups\GroupsService */
+	/**
+	 * {@inheritdoc}
+	 */
+	public function ready() {
 
-		$svc->setup();
-	}, 800);
-};
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function shutdown() {
+
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function activate() {
+
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function deactivate() {
+
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function upgrade() {
+
+	}
+
+}
