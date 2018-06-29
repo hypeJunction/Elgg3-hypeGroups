@@ -1,3 +1,18 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.6...3.0.0) (2018-06-29)
+
+
+### Bug Fixes
+
+* **boot:** use plugin bootstrap ([20eaa7d](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/commit/20eaa7d))
+
+
+### Features
+
+* **core:** updates and fixes ([be4cca9](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/commit/be4cca9))
+
+
+
 <a name="2.0.6"></a>
 ## [2.0.6](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.5...2.0.6) (2018-04-20)
 
