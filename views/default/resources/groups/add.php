@@ -52,7 +52,7 @@ $layout = elgg_view_layout('default', [
 	'header' => false,
 	'content' => $content,
 	'sidebar' => false,
-	'filter' => $action,
+	'filter_id' => $action,
 ]);
 
 echo elgg_view_page(null, $layout);

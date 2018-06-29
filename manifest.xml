@@ -11,7 +11,7 @@
 	<author>Ismayil Khayredinov (inof@hypejunction.com)</author>
 	<website>http://www.hypejunction.com/</website>
 	<copyright>(c) 2015-2018 Ismayil Khayredinov</copyright>
-	<license>GNU General Public License version 2</license>
+	<license>https://hypejunction.com/license</license>
 
 	<requires>
 		<type>elgg_release</type>
@@ -37,6 +37,11 @@
     <requires>
         <type>plugin</type>
         <name>hypeAutocomplete</name>
+    </requires>
+
+    <requires>
+        <type>plugin</type>
+        <name>hypeStash</name>
     </requires>
 
     <suggests>
