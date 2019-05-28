@@ -54,23 +54,25 @@ class Bootstrap extends PluginBootstrap {
 	 * {@inheritdoc}
 	 */
 	public function init() {
-		elgg_register_plugin_hook_handler('permissions_check', 'group', \hypeJunction\Groups\ConfigureEditPermissions::class);
-		elgg_register_plugin_hook_handler('container_permissions_check', 'group', \hypeJunction\Groups\ConfigureContainerPermissions::class);
+		elgg_register_plugin_hook_handler('permissions_check', 'group', ConfigureEditPermissions::class);
+		elgg_register_plugin_hook_handler('container_permissions_check', 'group', ConfigureContainerPermissions::class);
 
 		elgg_unregister_plugin_hook_handler('register', 'menu:page', '_groups_page_menu');
 		elgg_unregister_plugin_hook_handler('register', 'menu:page', '_groups_page_menu_group_profile');
-		elgg_register_plugin_hook_handler('register', 'menu:filter:groups/all', \hypeJunction\Groups\GroupsTabs::class);
-		elgg_register_plugin_hook_handler('register', 'menu:filter:collection/all', \hypeJunction\Groups\CollectionTabs::class);
-		elgg_register_plugin_hook_handler('register', 'menu:filter:collection/owner', \hypeJunction\Groups\CollectionTabs::class);
-		elgg_register_plugin_hook_handler('register', 'menu:owner_block', \hypeJunction\Groups\OwnerBlockMenu::class);
-		elgg_register_plugin_hook_handler('register', 'menu:entity', \hypeJunction\Groups\EntityMenu::class);
+		elgg_register_plugin_hook_handler('register', 'menu:filter:groups/all', GroupsTabs::class);
+		elgg_register_plugin_hook_handler('register', 'menu:filter:collection/all', CollectionTabs::class);
+		elgg_register_plugin_hook_handler('register', 'menu:filter:collection/owner', CollectionTabs::class);
+		elgg_register_plugin_hook_handler('register', 'menu:owner_block', OwnerBlockMenu::class);
+		elgg_register_plugin_hook_handler('register', 'menu:entity', EntityMenu::class);
 
-		elgg_register_plugin_hook_handler('fields', 'group', \hypeJunction\Groups\SetGroupFields::class, 100);
+		elgg_register_plugin_hook_handler('fields', 'group', SetGroupFields::class, 100);
 
-		elgg_register_plugin_hook_handler('tool_options', 'group', \hypeJunction\Groups\SetupGroupTools::class);
+		elgg_register_plugin_hook_handler('tool_options', 'group', SetupGroupTools::class);
 
 		elgg_extend_view('groups/sidebar/members', 'groups/sidebar/admins', 100);
 		elgg_extend_view('groups/groups.css', 'groups/extras.css');
+
+		elgg_register_plugin_hook_handler('commands', 'cli', RegisterCliCommands::class);
 	}
 
 	/**
