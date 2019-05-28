@@ -3,15 +3,25 @@
 namespace hypeJunction\Groups;
 
 use Elgg\Database\QueryBuilder;
+use Elgg\Di\ServiceFacade;
 use Elgg\Hook;
 use Elgg\Values;
 
 class GroupsService {
 
+	use ServiceFacade;
+
 	/**
 	 * @var GroupConfig[]
 	 */
 	protected $subtypes;
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function name() {
+		return 'groups';
+	}
 
 	/**
 	 * Get subtype config
