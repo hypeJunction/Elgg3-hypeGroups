@@ -17,6 +17,7 @@ if (!$container || !$container->canWriteToContainer(0, $type, $subtype)) {
 }
 
 $entity = new $class();
+$entity->subtype = $subtype;
 if (!$entity instanceof \ElggEntity) {
 	throw new \Elgg\BadRequestException();
 }
