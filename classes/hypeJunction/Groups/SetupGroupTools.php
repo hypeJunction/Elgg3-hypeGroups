@@ -14,9 +14,9 @@ class SetupGroupTools {
 		}
 
 		$tools = $hook->getValue();
+		/* @var \Elgg\Collections\Collection|\Elgg\Groups\Tool[] */
 
-		$svc = elgg()->groups;
-		/* @var $svc \hypeJunction\Groups\GroupsService */
+		$svc = GroupsService::instance();
 
 		$subtype = $entity->getSubtype();
 		$config = $svc->$subtype;
@@ -25,20 +25,22 @@ class SetupGroupTools {
 			return;
 		}
 
-//		if ($config->identifier && $config->identifier != 'groups') {
-//			foreach ($tools as &$tool) {
-//				$tool->label = elgg_echo("{$config->identifier}:tool:{$tool->name}");
-//			}
-//		}
+		if ($config->identifier && $config->identifier != 'groups') {
+			foreach ($tools as $tool) {
+				$tool->label = elgg_echo("{$config->identifier}:tool:{$tool->name}");
+			}
+		}
 
 		if (is_array($config->tools)) {
-			foreach ($tools as $key => &$tool) {
+			foreach ($tools as $key => $tool) {
 				if (!in_array($tool->name, $config->tools)) {
 					unset($tools[$key]);
 				} else {
 					$tool->default_on = true;
 				}
 			}
+		} else if ($config->tools === false) {
+			$tools->fill([]);
 		}
 
 		return $tools;
