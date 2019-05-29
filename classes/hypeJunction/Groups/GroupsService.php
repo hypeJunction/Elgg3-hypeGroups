@@ -206,7 +206,9 @@ class GroupsService {
 			});
 
 			foreach ($routes as $route_name => $route_options) {
-				elgg_register_route($route_name, $route_options);
+				if (!_elgg_services()->routes->get($route_name)) {
+					elgg_register_route($route_name, $route_options);
+				}
 			}
 
 			$collections = (array) $options->collections;
