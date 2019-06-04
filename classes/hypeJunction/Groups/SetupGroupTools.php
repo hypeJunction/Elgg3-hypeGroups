@@ -31,17 +31,17 @@ class SetupGroupTools {
 			}
 		}
 
-		if (is_array($config->tools)) {
-			foreach ($tools as $key => $tool) {
-				if (!in_array($tool->name, $config->tools)) {
-					unset($tools[$key]);
-				} else {
-					$tool->default_on = true;
-				}
+		$tools = $tools->filter(function ($tool) use ($config) {
+			if ($config->tools === false) {
+				return false;
 			}
-		} else if ($config->tools === false) {
-			$tools->fill([]);
-		}
+
+			if (!in_array($tool->name, $config->tools)) {
+				return false;
+			}
+
+			return true;
+		});
 
 		return $tools;
 	}

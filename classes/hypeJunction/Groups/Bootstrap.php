@@ -67,7 +67,7 @@ class Bootstrap extends PluginBootstrap {
 
 		elgg_register_plugin_hook_handler('fields', 'group', SetGroupFields::class, 100);
 
-		elgg_register_plugin_hook_handler('tool_options', 'group', SetupGroupTools::class);
+		elgg_register_plugin_hook_handler('tool_options', 'group', SetupGroupTools::class, 800);
 
 		elgg_extend_view('groups/sidebar/members', 'groups/sidebar/admins', 100);
 		elgg_extend_view('groups/groups.css', 'groups/extras.css');
