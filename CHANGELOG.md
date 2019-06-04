@@ -1,3 +1,22 @@
+<a name="3.0.1"></a>
+## [3.0.1](https://github.com/hypeJunction/Elgg3-hypeGroups/compare/3.0.0...3.0.1) (2019-06-04)
+
+
+### Bug Fixes
+
+* **constructor:** make sure to set subtype for generic classes ([6a589ea](https://github.com/hypeJunction/Elgg3-hypeGroups/commit/6a589ea))
+* **groups:** do not hijack routes if registered ([7df1ab7](https://github.com/hypeJunction/Elgg3-hypeGroups/commit/7df1ab7))
+* **svc:** add service facade trait to groups service ([6b54f5c](https://github.com/hypeJunction/Elgg3-hypeGroups/commit/6b54f5c))
+* **tools:** allow unsetting all group tools via config ([d905572](https://github.com/hypeJunction/Elgg3-hypeGroups/commit/d905572))
+* **tools:** correctly filter group tools ([cb62931](https://github.com/hypeJunction/Elgg3-hypeGroups/commit/cb62931))
+
+
+### Features
+
+* **cli:** add cli command to auto generate translations ([cd07ae4](https://github.com/hypeJunction/Elgg3-hypeGroups/commit/cd07ae4))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/hypeJunctionPro/Elgg3-hypeGroups/compare/2.0.6...3.0.0) (2018-06-29)
 
