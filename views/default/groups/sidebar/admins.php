@@ -8,7 +8,13 @@ if (!$entity instanceof ElggGroup) {
 $svc = elgg()->groups;
 /* @var $svc \hypeJunction\Groups\GroupsService */
 
-$body = elgg_view_entity_list($svc->getGroupAdmins($entity), [
+$admins = $svc->getGroupAdmins($entity);
+
+if (empty($admins)) {
+	return;
+}
+
+$body = elgg_view_entity_list($admins, [
 	'full_view' => false,
 ]);
 

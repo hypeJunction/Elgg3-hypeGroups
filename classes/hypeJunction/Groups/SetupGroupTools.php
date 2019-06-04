@@ -36,7 +36,7 @@ class SetupGroupTools {
 				return false;
 			}
 
-			if (!in_array($tool->name, $config->tools)) {
+			if (is_array($config->tools) && !in_array($tool->name, $config->tools)) {
 				return false;
 			}
 
