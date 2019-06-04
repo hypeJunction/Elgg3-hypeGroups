@@ -24,11 +24,8 @@ class GroupsTabs {
 			'featured',
 		];
 
-		foreach ($tabs as $key => $tab) {
-			if (in_array($tab->getName(), $remove)) {
-				unset($tabs[$key]);
-				continue;
-			}
+		foreach ($remove as $name) {
+			$tabs->remove($name);
 		}
 
 		$svc = elgg()->groups;

@@ -59,7 +59,7 @@ class Bootstrap extends PluginBootstrap {
 
 		elgg_unregister_plugin_hook_handler('register', 'menu:page', '_groups_page_menu');
 		elgg_unregister_plugin_hook_handler('register', 'menu:page', '_groups_page_menu_group_profile');
-		elgg_register_plugin_hook_handler('register', 'menu:filter:groups/all', GroupsTabs::class);
+		elgg_register_plugin_hook_handler('register', 'menu:filter:groups/all', GroupsTabs::class, 800);
 		elgg_register_plugin_hook_handler('register', 'menu:filter:collection/all', CollectionTabs::class);
 		elgg_register_plugin_hook_handler('register', 'menu:filter:collection/owner', CollectionTabs::class);
 		elgg_register_plugin_hook_handler('register', 'menu:owner_block', OwnerBlockMenu::class);
