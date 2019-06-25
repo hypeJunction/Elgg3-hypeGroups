@@ -54,18 +54,6 @@ class EntityMenu {
 			}
 		}
 
-		if ($entity->canDelete()) {
-			$menu[] = \ElggMenuItem::factory([
-				'name' => 'groups:delete',
-				'text' => elgg_echo('delete'),
-				'href' => elgg_generate_action_url('groups/delete', ['guid' => $entity->guid]),
-				'confirm' => true,
-				'icon' => 'trash',
-				'link_class' => 'elgg-state elgg-state-danger',
-				'priority' => 900,
-			]);
-		}
-
 		$user = elgg_get_logged_in_user_entity();
 
 		if ($entity->isMember($user)) {
