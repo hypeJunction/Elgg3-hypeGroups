@@ -1,3 +1,14 @@
+<a name="3.0.4"></a>
+## [3.0.4](https://github.com/hypeJunction/Elgg3-hypeGroups/compare/3.0.3...3.0.4) (2019-06-25)
+
+
+### Bug Fixes
+
+* **menu:** override correct menu items ([94a6282](https://github.com/hypeJunction/Elgg3-hypeGroups/commit/94a6282))
+* **menu:** use core delete menu item ([77e52d0](https://github.com/hypeJunction/Elgg3-hypeGroups/commit/77e52d0))
+
+
+
 <a name="3.0.3"></a>
 ## [3.0.3](https://github.com/hypeJunction/Elgg3-hypeGroups/compare/3.0.2...3.0.3) (2019-06-04)
 
