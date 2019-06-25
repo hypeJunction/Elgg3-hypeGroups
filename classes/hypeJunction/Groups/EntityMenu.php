@@ -18,7 +18,7 @@ class EntityMenu {
 
 		if ($entity->canEdit()) {
 			$menu[] = \ElggMenuItem::factory([
-				'name' => 'groups:edit',
+				'name' => 'edit',
 				'text' => elgg_echo('edit'),
 				'href' => elgg_generate_url("edit:group:$entity->subtype", [
 					'guid' => $entity->guid,
@@ -52,6 +52,18 @@ class EntityMenu {
 					'icon' => 'inbox',
 				]);
 			}
+		}
+
+		if ($entity->canDelete()) {
+			$menu[] = \ElggMenuItem::factory([
+				'name' => 'delete',
+				'text' => elgg_echo('delete'),
+				'href' => elgg_generate_action_url('entity/delete', ['guid' => $entity->guid]),
+				'confirm' => true,
+				'icon' => 'trash',
+				'link_class' => 'elgg-state elgg-state-danger',
+				'priority' => 900,
+			]);
 		}
 
 		$user = elgg_get_logged_in_user_entity();
