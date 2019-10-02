@@ -1,3 +1,13 @@
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/hypeJunction/Elgg3-hypeGroups/compare/3.0.4...3.1.0) (2019-10-02)
+
+
+### Features
+
+* **lists:** integrate list search with field config ([2ae6bff](https://github.com/hypeJunction/Elgg3-hypeGroups/commit/2ae6bff))
+
+
+
 <a name="3.0.4"></a>
 ## [3.0.4](https://github.com/hypeJunction/Elgg3-hypeGroups/compare/3.0.3...3.0.4) (2019-06-25)
 
