@@ -116,7 +116,11 @@ class DefaultGroupCollection extends Collection {
 	 * {@inheritdoc}
 	 */
 	public function getSearchOptions() {
-		return parent::getSearchOptions();
+		$options = parent::getSearchOptions();
+
+		$options[] = ProfileDataSearchField::class;
+
+		return $options;
 	}
 
 	/**
