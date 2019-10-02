@@ -1,3 +1,13 @@
+<a name="3.1.1"></a>
+## [3.1.1](https://github.com/hypeJunction/Elgg3-hypeGroups/compare/3.1.0...3.1.1) (2019-10-02)
+
+
+### Bug Fixes
+
+* **deps:** fix vulnerable packages ([e5d5923](https://github.com/hypeJunction/Elgg3-hypeGroups/commit/e5d5923))
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/hypeJunction/Elgg3-hypeGroups/compare/3.0.4...3.1.0) (2019-10-02)
 
