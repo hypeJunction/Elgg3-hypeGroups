@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'groups' => \DI\object(\hypeJunction\Groups\GroupsService::class),
+	'groups' => \DI\create(\hypeJunction\Groups\GroupsService::class),
 ];
