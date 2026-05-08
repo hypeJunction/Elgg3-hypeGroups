@@ -5,7 +5,7 @@ $subtype = elgg_extract('subtype', $vars, 'group');
 
 $class = elgg_get_entity_class($type, $subtype);
 if (!$class) {
-	throw new \Elgg\BadRequestException();
+	throw new \Elgg\Exceptions\Http\BadRequestException();
 }
 
 $container_guid = elgg_extract('container_guid', $vars);
@@ -13,13 +13,13 @@ elgg_entity_gatekeeper($container_guid);
 
 $container = get_entity($container_guid);
 if (!$container || !$container->canWriteToContainer(0, $type, $subtype)) {
-	throw new \Elgg\EntityPermissionsException();
+	throw new \Elgg\Exceptions\Http\EntityPermissionsException();
 }
 
 $entity = new $class();
 $entity->subtype = $subtype;
 if (!$entity instanceof \ElggEntity) {
-	throw new \Elgg\BadRequestException();
+	throw new \Elgg\Exceptions\Http\BadRequestException();
 }
 
 $entity->container_guid = $container->guid;

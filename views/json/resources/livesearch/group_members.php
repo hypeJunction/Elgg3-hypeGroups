@@ -42,7 +42,7 @@ if (get_input('friends_only', false)) {
 	}
 
 	if (!$target || !$target->canEdit()) {
-		throw new \Elgg\EntityPermissionsException();
+		throw new \Elgg\Exceptions\Http\EntityPermissionsException();
 	}
 
 	$dbprefix = elgg_get_config('dbprefix');

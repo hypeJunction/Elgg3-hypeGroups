@@ -5,11 +5,11 @@ elgg_entity_gatekeeper($guid, 'group');
 
 $entity = get_entity($guid);
 if (!$entity instanceof \ElggEntity) {
-	throw new \Elgg\BadRequestException();
+	throw new \Elgg\Exceptions\Http\BadRequestException();
 }
 
 if (!$entity->canEdit()) {
-	throw new \Elgg\EntityPermissionsException();
+	throw new \Elgg\Exceptions\Http\EntityPermissionsException();
 }
 
 elgg_push_entity_breadcrumbs($entity);
