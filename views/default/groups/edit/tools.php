@@ -32,7 +32,7 @@ if (!empty($tools)) {
 	}
 }
 
-$fields = elgg_trigger_plugin_hook('fields:tools', 'group', $vars, $fields);
+$fields = elgg_trigger_event_results('fields:tools', 'group', $vars, $fields);
 
 foreach ($fields as $field) {
 	echo elgg_view_field($field);

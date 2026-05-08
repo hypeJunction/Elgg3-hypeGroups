@@ -2,18 +2,18 @@
 
 namespace hypeJunction\Groups;
 
-use Elgg\Hook;
+use Elgg\Event;
 
 class SetupGroupTools {
 
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$entity = $hook->getEntityParam();
+		$entity = $event->getEntityParam();
 		if (!$entity instanceof \ElggGroup) {
 			return;
 		}
 
-		$tools = $hook->getValue();
+		$tools = $event->getValue();
 		/* @var \Elgg\Collections\Collection|\Elgg\Groups\Tool[] */
 
 		$svc = GroupsService::instance();

@@ -2,27 +2,27 @@
 
 namespace hypeJunction\Groups;
 
-use Elgg\Hook;
+use Elgg\Event;
 
 class ConfigureEditPermissions {
 
 	/**
 	 * Setup group edit permissions
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Hook
 	 *
 	 * @return bool
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$group = $hook->getEntityParam();
-		$user = $hook->getUserParam();
+		$group = $event->getEntityParam();
+		$user = $event->getUserParam();
 
-		if (!$group instanceof \ElggGroup || $user instanceof \ElggUser) {
+		if (!$group instanceof \ElggGroup || !$user instanceof \ElggUser) {
 			return null;
 		}
 
-		if (check_entity_relationship($user->guid, 'group_admin', $group->guid)) {
+		if ($user->hasRelationship($group->guid, 'group_admin')) {
 			return true;
 		}
 	}

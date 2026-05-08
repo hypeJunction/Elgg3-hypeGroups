@@ -42,7 +42,7 @@ foreach ($group_profile_fields as $shortname => $valtype) {
 	$fields[] = $options;
 }
 
-$fields = elgg_trigger_plugin_hook('fields:profile', 'group', $vars, $fields);
+$fields = elgg_trigger_event_results('fields:profile', 'group', $vars, $fields);
 
 foreach ($fields as $field) {
 	echo elgg_view_field($field);

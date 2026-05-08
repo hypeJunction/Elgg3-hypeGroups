@@ -1,0 +1,75 @@
+name: ${PLUGIN_ID:?set PLUGIN_ID in docker/.env}-elgg5
+
+services:
+  elgg:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - elgg-data:/var/www/data
+      - ..:/var/www/html/mod/${PLUGIN_ID}
+    environment:
+      PLUGIN_ID: ${PLUGIN_ID}
+      ELGG_DB_HOST: db
+      ELGG_DB_NAME: elgg
+      ELGG_DB_USER: elgg
+      ELGG_DB_PASS: elgg
+      ELGG_SITE_URL: "http://elgg/"
+      ELGG_DATA_ROOT: "/var/www/data/"
+      ELGG_DB_PREFIX: "elgg_"
+      ELGG_ADMIN_EMAIL: "admin@example.com"
+      ELGG_ADMIN_PASSWORD: "admin12345"
+    ports:
+      - "${ELGG_PORT:-9597}:80"
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: /usr/local/bin/elgg-install.sh
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /var/www/html/.elgg-installed && curl -sf -H 'Host: elgg' http://localhost/ > /dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 90s
+
+  db:
+    image: mysql:8.0
+    command: --innodb-use-native-aio=0
+    environment:
+      MYSQL_DATABASE: elgg
+      MYSQL_USER: elgg
+      MYSQL_PASSWORD: elgg
+      MYSQL_ROOT_PASSWORD: root
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "${DB_PORT:-10597}:3306"
+
+  node:
+    image: mcr.microsoft.com/playwright:v1.59.1-noble
+    volumes:
+      - ..:/plugin
+    working_dir: /plugin
+    environment:
+      PLUGIN_ID: ${PLUGIN_ID}
+      ELGG_BASE_URL: "http://elgg"
+      ELGG_PORT: "80"
+      ELGG_DB_HOST: db
+      ELGG_DB_PORT: "3306"
+      ELGG_DB_USER: elgg
+      ELGG_DB_PASS: elgg
+      ELGG_DB_NAME: elgg
+    depends_on:
+      elgg:
+        condition: service_healthy
+    profiles:
+      - test
+
+volumes:
+  elgg-data:
+  db-data:

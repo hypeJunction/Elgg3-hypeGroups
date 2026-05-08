@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Groups;
 
-use Elgg\Hook;
+use Elgg\Event;
 use Elgg\Request;
 use ElggEntity;
 use ElggGroup;
@@ -22,20 +22,20 @@ class SetGroupFields {
 	 *
 	 * @elgg_plugin_hook fields group
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Hook
 	 *
 	 * @return Collection
 	 * @throws \InvalidParameterException
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$entity = $hook->getEntityParam();
+		$entity = $event->getEntityParam();
 
 		if (!$entity instanceof ElggGroup) {
 			return null;
 		}
 
-		$fields = $hook->getValue();
+		$fields = $event->getValue();
 		/* @var $fields Collection */
 
 		$fields->add('name', new TitleField([

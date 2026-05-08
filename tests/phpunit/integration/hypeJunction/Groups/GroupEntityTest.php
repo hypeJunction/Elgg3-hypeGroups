@@ -10,77 +10,49 @@ use Elgg\IntegrationTestCase;
  */
 class GroupEntityTest extends IntegrationTestCase {
 
-    public function up() {}
-    public function down() {}
+    public function up(): void {}
+    public function down(): void {}
 
     public function getPluginID(): string {
-        return '';
+        return 'hypegroups';
     }
 
-    private function skipIfPluginMissing(): void {
-        if (!elgg_get_plugin_from_id('hypegroups') || !elgg_get_plugin_from_id('hypegroups')->isActive()) {
-            $this->markTestSkipped('hypegroups not active in test DB');
-        }
-    }
+    public function testGroupEntityClassMappedForGroupSubtype(): void {
+        $group = $this->createGroup();
 
-    public function testGroupEntityClassMappedForGroupSubtype() {
-        $this->skipIfPluginMissing();
-
-        $owner = $this->createUser();
-        $group = new \ElggGroup();
-        $group->name = 'Test Group';
-        $group->access_id = ACCESS_PUBLIC;
-        $group->owner_guid = $owner->guid;
-        $group->container_guid = elgg_get_site_entity()->guid;
-        $this->assertTrue((bool) $group->save());
-
-        // Flush cache and reload
         _elgg_services()->entityCache->delete($group->guid);
         $loaded = get_entity($group->guid);
 
         $this->assertInstanceOf(Group::class, $loaded,
             'Loaded group entity should be mapped to hypeJunction\Groups\Group');
-
-        $group->delete();
     }
 
-    public function testGroupEntityCRUD() {
-        $this->skipIfPluginMissing();
-
-        $owner = $this->createUser();
-
-        // Create
-        $group = new Group();
-        $group->name = 'CRUD Test Group';
-        $group->access_id = ACCESS_PUBLIC;
-        $group->owner_guid = $owner->guid;
-        $group->container_guid = elgg_get_site_entity()->guid;
+    public function testGroupEntityCRUD(): void {
+        $group = $this->createGroup(['name' => 'CRUD Test Group']);
         $group->custom_setting = 'test_value';
-        $saved = $group->save();
-        $this->assertTrue((bool) $saved);
         $guid = $group->guid;
 
-        // Read
         _elgg_services()->entityCache->delete($guid);
         $loaded = get_entity($guid);
         $this->assertInstanceOf(Group::class, $loaded);
         $this->assertEquals('CRUD Test Group', $loaded->name);
         $this->assertEquals('test_value', $loaded->custom_setting);
 
-        // Update
         $loaded->name = 'Updated Group Name';
-        $this->assertTrue((bool) $loaded->save());
+        elgg_call(ELGG_IGNORE_ACCESS, function() use ($loaded) {
+            $loaded->save();
+        });
         _elgg_services()->entityCache->delete($guid);
         $updated = get_entity($guid);
         $this->assertEquals('Updated Group Name', $updated->name);
 
-        // Delete
-        $this->assertTrue($updated->delete());
+        elgg_call(ELGG_IGNORE_ACCESS, function() use ($updated) {
+            $updated->delete();
+        });
         $this->assertFalse((bool) get_entity($guid));
     }
 
-    public function testGroupOwnerCanEdit() {
-        $this->skipIfPluginMissing();
+    public function testGroupOwnerCanEdit(): void {
 
         $owner = $this->createUser();
         $other = $this->createUser();

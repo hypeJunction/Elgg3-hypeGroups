@@ -2,123 +2,113 @@
 
 namespace hypeJunction\Groups;
 
+use Elgg\Event;
 use Elgg\IntegrationTestCase;
 
-/**
- * Tests ConfigureEditPermissions (group admin can edit) and
- * ConfigureContainerPermissions (limited_groups setting).
- */
 class PermissionsTest extends IntegrationTestCase {
 
-    public function up() {}
-    public function down() {}
+	public function up(): void {}
 
-    public function getPluginID(): string {
-        return '';
-    }
+	public function down(): void {}
 
-    // --- ConfigureEditPermissions ---
+	public function getPluginID(): string {
+		return 'hypegroups';
+	}
 
-    public function testGroupAdminCanEditGroup() {
-        $owner = $this->createUser();
-        $member = $this->createUser();
-        $group = $this->createGroup(['owner_guid' => $owner->guid]);
+	public function testGroupAdminCanEditGroup(): void {
+		$owner = $this->createUser();
+		$member = $this->createUser();
+		$group = $this->createGroup(['owner_guid' => $owner->guid]);
 
-        // Make $member a group admin
-        add_entity_relationship($member->guid, 'group_admin', $group->guid);
+		$member->addRelationship($group->guid, 'group_admin');
 
-        $hook = $this->getMockBuilder(\Elgg\Hook::class)->getMock();
-        $hook->method('getEntityParam')->willReturn($group);
-        $hook->method('getUserParam')->willReturn($member);
-        $hook->method('getValue')->willReturn(false);
+		$event = $this->getMockBuilder(Event::class)->disableOriginalConstructor()->getMock();
+		$event->method('getEntityParam')->willReturn($group);
+		$event->method('getUserParam')->willReturn($member);
+		$event->method('getValue')->willReturn(false);
 
-        $handler = new ConfigureEditPermissions();
-        $result = $handler($hook);
+		$handler = new ConfigureEditPermissions();
+		$result = $handler($event);
 
-        $this->assertTrue($result, 'Group admin should receive edit permission');
-    }
+		$this->assertTrue($result, 'Group admin should receive edit permission');
+	}
 
-    public function testNonAdminGroupMemberCannotEditViaAdminHook() {
-        $owner = $this->createUser();
-        $member = $this->createUser();
-        $group = $this->createGroup(['owner_guid' => $owner->guid]);
+	public function testNonAdminGroupMemberCannotEditViaAdminHook(): void {
+		$owner = $this->createUser();
+		$member = $this->createUser();
+		$group = $this->createGroup(['owner_guid' => $owner->guid]);
 
-        // $member is NOT a group_admin
-        $hook = $this->getMockBuilder(\Elgg\Hook::class)->getMock();
-        $hook->method('getEntityParam')->willReturn($group);
-        $hook->method('getUserParam')->willReturn($member);
-        $hook->method('getValue')->willReturn(false);
+		$event = $this->getMockBuilder(Event::class)->disableOriginalConstructor()->getMock();
+		$event->method('getEntityParam')->willReturn($group);
+		$event->method('getUserParam')->willReturn($member);
+		$event->method('getValue')->willReturn(false);
 
-        $handler = new ConfigureEditPermissions();
-        $result = $handler($hook);
+		$handler = new ConfigureEditPermissions();
+		$result = $handler($event);
 
-        $this->assertNull($result, 'Non-admin member should not receive edit permission from this hook');
-    }
+		$this->assertNull($result, 'Non-admin member should not receive edit permission from this handler');
+	}
 
-    public function testEditPermissionsHookIgnoresNonGroupEntities() {
-        $user = $this->createUser();
-        $object = $this->createObject(['subtype' => 'blog', 'owner_guid' => $user->guid]);
+	public function testEditPermissionsHandlerIgnoresNonGroupEntities(): void {
+		$user = $this->createUser();
+		$object = $this->createObject(['subtype' => 'blog', 'owner_guid' => $user->guid]);
 
-        $hook = $this->getMockBuilder(\Elgg\Hook::class)->getMock();
-        $hook->method('getEntityParam')->willReturn($object);
-        $hook->method('getUserParam')->willReturn($user);
-        $hook->method('getValue')->willReturn(false);
+		$event = $this->getMockBuilder(Event::class)->disableOriginalConstructor()->getMock();
+		$event->method('getEntityParam')->willReturn($object);
+		$event->method('getUserParam')->willReturn($user);
+		$event->method('getValue')->willReturn(false);
 
-        $handler = new ConfigureEditPermissions();
-        $result = $handler($hook);
+		$handler = new ConfigureEditPermissions();
+		$result = $handler($event);
 
-        $this->assertNull($result, 'Handler should return null for non-group entities');
-    }
+		$this->assertNull($result, 'Handler should return null for non-group entities');
+	}
 
-    // --- ConfigureContainerPermissions ---
+	public function testContainerPermissionsReturnsFalseWhenLimitedGroupsEnabledForRegularUser(): void {
+		$groups_plugin = elgg_get_plugin_from_id('groups');
+		if (!$groups_plugin) {
+			$this->markTestSkipped('Core groups plugin not active');
+		}
 
-    public function testContainerPermissionsReturnsFalseWhenLimitedGroupsEnabledForRegularUser() {
-        // Set limited_groups = 'yes' on the core groups plugin
-        $groups_plugin = elgg_get_plugin_from_id('groups');
-        if (!$groups_plugin) {
-            $this->markTestSkipped('Core groups plugin not active');
-        }
+		$original = $groups_plugin->getSetting('limited_groups');
+		$groups_plugin->setSetting('limited_groups', 'yes');
 
-        $original = $groups_plugin->getSetting('limited_groups');
-        $groups_plugin->setSetting('limited_groups', 'yes');
+		$user = $this->createUser();
+		_elgg_services()->session_manager->setLoggedInUser($user);
 
-        $user = $this->createUser();
-        elgg_get_session()->setLoggedInUser($user);
+		$event = $this->getMockBuilder(Event::class)->disableOriginalConstructor()->getMock();
+		$event->method('getValue')->willReturn(true);
 
-        $hook = $this->getMockBuilder(\Elgg\Hook::class)->getMock();
-        $hook->method('getValue')->willReturn(true);
+		$handler = new ConfigureContainerPermissions();
+		$result = $handler($event);
 
-        $handler = new ConfigureContainerPermissions();
-        $result = $handler($hook);
+		$this->assertFalse($result, 'Regular user should be blocked when limited_groups is set');
 
-        $this->assertFalse($result, 'Regular user should be blocked when limited_groups is set');
+		$groups_plugin->setSetting('limited_groups', $original);
+		_elgg_services()->session_manager->removeLoggedInUser();
+	}
 
-        // Restore
-        $groups_plugin->setSetting('limited_groups', $original);
-        elgg_get_session()->removeLoggedInUser();
-    }
+	public function testContainerPermissionsReturnsNullWhenLimitedGroupsNotSet(): void {
+		$groups_plugin = elgg_get_plugin_from_id('groups');
+		if (!$groups_plugin) {
+			$this->markTestSkipped('Core groups plugin not active');
+		}
 
-    public function testContainerPermissionsReturnsNullWhenLimitedGroupsNotSet() {
-        $groups_plugin = elgg_get_plugin_from_id('groups');
-        if (!$groups_plugin) {
-            $this->markTestSkipped('Core groups plugin not active');
-        }
+		$original = $groups_plugin->getSetting('limited_groups');
+		$groups_plugin->setSetting('limited_groups', 'no');
 
-        $original = $groups_plugin->getSetting('limited_groups');
-        $groups_plugin->setSetting('limited_groups', 'no');
+		$user = $this->createUser();
+		_elgg_services()->session_manager->setLoggedInUser($user);
 
-        $user = $this->createUser();
-        elgg_get_session()->setLoggedInUser($user);
+		$event = $this->getMockBuilder(Event::class)->disableOriginalConstructor()->getMock();
+		$event->method('getValue')->willReturn(true);
 
-        $hook = $this->getMockBuilder(\Elgg\Hook::class)->getMock();
-        $hook->method('getValue')->willReturn(true);
+		$handler = new ConfigureContainerPermissions();
+		$result = $handler($event);
 
-        $handler = new ConfigureContainerPermissions();
-        $result = $handler($hook);
+		$this->assertNull($result, 'Handler should return null when setting is not "yes"');
 
-        $this->assertNull($result, 'Handler should return null when setting is not "yes"');
-
-        $groups_plugin->setSetting('limited_groups', $original);
-        elgg_get_session()->removeLoggedInUser();
-    }
+		$groups_plugin->setSetting('limited_groups', $original);
+		_elgg_services()->session_manager->removeLoggedInUser();
+	}
 }

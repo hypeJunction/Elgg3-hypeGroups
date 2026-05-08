@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Groups;
 
-use Elgg\Hook;
+use Elgg\Event;
 
 class RegisterCliCommands {
 
@@ -10,12 +10,12 @@ class RegisterCliCommands {
 	 * Register cli commands
 	 * @elgg_plugin_hook commands cli
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Hook
 	 *
 	 * @return array
 	 */
-	public function __invoke(Hook $hook) {
-		$commands = $hook->getValue();
+	public function __invoke(Event $event) {
+		$commands = $event->getValue();
 
 		$commands[] = TranslateCommand::class;
 

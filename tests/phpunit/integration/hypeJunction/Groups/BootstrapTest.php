@@ -4,57 +4,44 @@ namespace hypeJunction\Groups;
 
 use Elgg\IntegrationTestCase;
 
-/**
- * Verifies that Bootstrap::init() registers the expected hook handlers
- * and that Bootstrap::boot() wires the GroupsService into the DI container.
- */
 class BootstrapTest extends IntegrationTestCase {
 
-    public function up() {}
-    public function down() {}
+	public function up(): void {}
 
-    public function getPluginID(): string {
-        return '';
-    }
+	public function down(): void {}
 
-    private function skipIfPluginMissing(): void {
-        if (!elgg_get_plugin_from_id('hypegroups')) {
-            $this->markTestSkipped('hypegroups not installed in test DB');
-        }
-    }
+	public function getPluginID(): string {
+		return 'hypegroups';
+	}
 
-    public function testGroupsServiceRegisteredInContainer() {
-        $this->skipIfPluginMissing();
-        $this->assertTrue(\Elgg\Application::$_instance !== null);
-        $svc = elgg()->groups;
-        $this->assertInstanceOf(GroupsService::class, $svc);
-    }
+	public function testPluginIsActive(): void {
+		$plugin = elgg_get_plugin_from_id('hypegroups');
+		$this->assertNotNull($plugin);
+		$this->assertTrue($plugin->isActive());
+	}
 
-    public function testEditPermissionsHookRegistered() {
-        $this->skipIfPluginMissing();
-        $handlers = _elgg_services()->hooks->getAllHandlers();
-        $this->assertArrayHasKey('permissions_check', $handlers);
-        $this->assertArrayHasKey('group', $handlers['permissions_check']);
-    }
+	public function testGroupsServiceRegisteredInContainer(): void {
+		$svc = elgg()->groups;
+		$this->assertInstanceOf(GroupsService::class, $svc);
+	}
 
-    public function testContainerPermissionsHookRegistered() {
-        $this->skipIfPluginMissing();
-        $handlers = _elgg_services()->hooks->getAllHandlers();
-        $this->assertArrayHasKey('container_permissions_check', $handlers);
-        $this->assertArrayHasKey('group', $handlers['container_permissions_check']);
-    }
+	public function testEditPermissionsEventRegistered(): void {
+		$events = _elgg_services()->events;
+		$this->assertTrue($events->hasHandler('permissions_check', 'group'));
+	}
 
-    public function testGroupFieldsHookRegistered() {
-        $this->skipIfPluginMissing();
-        $handlers = _elgg_services()->hooks->getAllHandlers();
-        $this->assertArrayHasKey('fields', $handlers);
-        $this->assertArrayHasKey('group', $handlers['fields']);
-    }
+	public function testContainerPermissionsEventRegistered(): void {
+		$events = _elgg_services()->events;
+		$this->assertTrue($events->hasHandler('container_permissions_check', 'group'));
+	}
 
-    public function testToolOptionsHookRegistered() {
-        $this->skipIfPluginMissing();
-        $handlers = _elgg_services()->hooks->getAllHandlers();
-        $this->assertArrayHasKey('tool_options', $handlers);
-        $this->assertArrayHasKey('group', $handlers['tool_options']);
-    }
+	public function testGroupFieldsEventRegistered(): void {
+		$events = _elgg_services()->events;
+		$this->assertTrue($events->hasHandler('fields', 'group'));
+	}
+
+	public function testToolOptionsEventRegistered(): void {
+		$events = _elgg_services()->events;
+		$this->assertTrue($events->hasHandler('tool_options', 'group'));
+	}
 }

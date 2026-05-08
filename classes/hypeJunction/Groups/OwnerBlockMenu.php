@@ -2,16 +2,16 @@
 
 namespace hypeJunction\Groups;
 
-use Elgg\Hook;
+use Elgg\Event;
 use hypeJunction\Lists\CollectionInterface;
 
 class OwnerBlockMenu {
 
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$menu = $hook->getValue();
+		$menu = $event->getValue();
 
-		$owner = $hook->getEntityParam();
+		$owner = $event->getEntityParam();
 
 		$svc = elgg()->groups;
 		/* @var $svc \hypeJunction\Groups\GroupsService */
@@ -37,13 +37,13 @@ class OwnerBlockMenu {
 				];
 			}
 
-			$menu[] = \ElggMenuItem::factory([
+			$menu->add(\ElggMenuItem::factory([
 				'name' => 'groups',
 				'text' => elgg_echo('groups'),
 				'href' => 'javascript:',
 				'child_menu' => $child_menu,
 				'selected' => in_array($svc->getPageIdentifier(), $identifiers),
-			]);
+			]));
 
 			foreach ($subtypes as $subtype => $conf) {
 
@@ -53,7 +53,7 @@ class OwnerBlockMenu {
 				]);
 
 				if ($joined) {
-					$menu[] = \ElggMenuItem::factory([
+					$menu->add(\ElggMenuItem::factory([
 						'name' => "groups:$subtype",
 						'parent_name' => 'groups',
 						'text' => elgg_echo("{$conf->identifier}:yours"),
@@ -61,7 +61,7 @@ class OwnerBlockMenu {
 							'username' => $owner->username,
 						]),
 						'badge' => $joined,
-					]);
+					]));
 
 					$owned = $svc->getAdministeredGroups($owner, [
 						'count' => true,
@@ -69,7 +69,7 @@ class OwnerBlockMenu {
 					]);
 
 					if ($owned) {
-						$menu[] = \ElggMenuItem::factory([
+						$menu->add(\ElggMenuItem::factory([
 							'name' => "groups:$subtype:owned",
 							'parent_name' => "groups",
 							'text' => elgg_echo("{$conf->identifier}:owned"),
@@ -77,10 +77,10 @@ class OwnerBlockMenu {
 								'username' => $owner->username,
 							]),
 							'badge' => $owned,
-						]);
+						]));
 					}
 				} else if ($owner->canWriteToContainer(0, 'group', $subtype)) {
-					$menu[] = \ElggMenuItem::factory([
+					$menu->add(\ElggMenuItem::factory([
 						'name' => "groups:$subtype",
 						'parent_name' => 'groups',
 						'text' => elgg_echo("add:group:$subtype"),
@@ -88,7 +88,7 @@ class OwnerBlockMenu {
 							'container_guid' => $owner->guid,
 						]),
 						'icon' => 'plus',
-					]);
+					]));
 				}
 			}
 		}

@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Groups;
 
-use Elgg\Hook;
+use Elgg\Event;
 use hypeJunction\Lists\Collection;
 use hypeJunction\Lists\CollectionInterface;
 
@@ -11,13 +11,13 @@ class CollectionTabs {
 	/**
 	 * @elgg_plugin_hook register menu:filter:collection/all
 	 *
-	 * @param Hook $hook
+	 * @param Event $event
 	 *
 	 * @return mixed|null
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$collection = $hook->getParam('collection');
+		$collection = $event->getParam('collection');
 
 		if (!$collection instanceof DefaultGroupCollection || !in_array($collection->getCollectionType(), ['all', 'member'])) {
 			return null;
@@ -27,6 +27,6 @@ class CollectionTabs {
 			return null;
 		}
 
-		return elgg_trigger_plugin_hook('register', 'menu:filter:groups/all', $hook->getParams(), $hook->getValue());
+		return elgg_trigger_event_results('register', 'menu:filter:groups/all', $event->getParams(), $event->getValue());
 	}
 }

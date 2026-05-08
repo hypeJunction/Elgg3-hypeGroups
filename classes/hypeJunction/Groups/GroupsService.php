@@ -3,8 +3,8 @@
 namespace hypeJunction\Groups;
 
 use Elgg\Database\QueryBuilder;
-use Elgg\Di\ServiceFacade;
-use Elgg\Hook;
+use Elgg\Traits\Di\ServiceFacade;
+use Elgg\Event;
 use Elgg\Values;
 
 class GroupsService {
@@ -14,12 +14,12 @@ class GroupsService {
 	/**
 	 * @var GroupConfig[]
 	 */
-	protected $subtypes;
+	protected $subtypes = [];
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public static function name() {
+	public static function name(): string {
 		return 'groups';
 	}
 
@@ -118,13 +118,12 @@ class GroupsService {
 		foreach ($this->subtypes as $subtype => $options) {
 			$class = $options->class;
 			elgg_set_entity_class('group', $subtype, $class);
-			elgg_register_entity_type('group', $subtype);
 
-			elgg_register_plugin_hook_handler('uses:comments', "group:$subtype", [\Elgg\Values::class, 'getFalse']);
-			elgg_register_plugin_hook_handler('uses:autosave', "group:$subtype", [\Elgg\Values::class, 'getFalse']);
-			elgg_register_plugin_hook_handler('uses:location', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
-			elgg_register_plugin_hook_handler('uses:icon', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
-			elgg_register_plugin_hook_handler('uses:cover', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
+			elgg_register_event_handler('uses:comments', "group:$subtype", [\Elgg\Values::class, 'getFalse']);
+			elgg_register_event_handler('uses:autosave', "group:$subtype", [\Elgg\Values::class, 'getFalse']);
+			elgg_register_event_handler('uses:location', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
+			elgg_register_event_handler('uses:icon', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
+			elgg_register_event_handler('uses:cover', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
 
 			$identifier = $options->identifier;
 
@@ -190,15 +189,15 @@ class GroupsService {
 				],
 			];
 
-			elgg_register_plugin_hook_handler('gatekeeper', "group:$subtype", function (Hook $hook) use ($subtype) {
+			elgg_register_event_handler('gatekeeper', "group:$subtype", function (Event $event) use ($subtype) {
 				// Allow access to group profile page
 
-				$entity = $hook->getEntityParam();
+				$entity = $event->getEntityParam();
 				if (!has_access_to_entity($entity)) {
 					return;
 				}
 
-				$route = $hook->getParam('route');
+				$route = $event->getParam('route');
 
 				if ($route === 'view:group' || $route === "view:group:$subtype") {
 					return true;
@@ -213,25 +212,27 @@ class GroupsService {
 
 			$collections = (array) $options->collections;
 
-			elgg_register_collection(
-				"collection:group:{$subtype}:all",
-				elgg_extract('all', $collections, \hypeJunction\Groups\DefaultGroupCollection::class)
-			);
+			if (function_exists('elgg_register_collection')) {
+				elgg_register_collection(
+					"collection:group:{$subtype}:all",
+					elgg_extract('all', $collections, \hypeJunction\Groups\DefaultGroupCollection::class)
+				);
 
-			elgg_register_collection(
-				"collection:group:{$subtype}:owner",
-				elgg_extract('owner', $collections, \hypeJunction\Groups\OwnedGroupCollection::class)
-			);
+				elgg_register_collection(
+					"collection:group:{$subtype}:owner",
+					elgg_extract('owner', $collections, \hypeJunction\Groups\OwnedGroupCollection::class)
+				);
 
-			elgg_register_collection(
-				"collection:group:{$subtype}:member",
-				elgg_extract('member', $collections, \hypeJunction\Groups\JoinedGroupCollection::class)
-			);
+				elgg_register_collection(
+					"collection:group:{$subtype}:member",
+					elgg_extract('member', $collections, \hypeJunction\Groups\JoinedGroupCollection::class)
+				);
 
-			elgg_register_collection(
-				"collection:group:{$subtype}:featured",
-				elgg_extract('featured', $collections, \hypeJunction\Groups\FeaturedGroupCollection::class)
-			);
+				elgg_register_collection(
+					"collection:group:{$subtype}:featured",
+					elgg_extract('featured', $collections, \hypeJunction\Groups\FeaturedGroupCollection::class)
+				);
+			}
 
 			$labels = (array) $options->labels;
 
@@ -239,7 +240,7 @@ class GroupsService {
 				$singular = elgg_extract('item', $lang_labels);
 				$plural = elgg_extract('collection', $lang_labels);
 
-				add_translation($lang, [
+				_elgg_services()->translator->addTranslation($lang, [
 					"item:group:$subtype" => $singular,
 					"collection:group:$subtype" => $plural,
 				]);
@@ -253,18 +254,18 @@ class GroupsService {
 				]);
 			}
 
-			elgg_register_plugin_hook_handler('container_logic_check', 'group', function (Hook $hook) use ($subtype, $options) {
+			elgg_register_event_handler('container_logic_check', 'group', function (Event $event) use ($subtype, $options) {
 				$parents = (array) $options->parents;
 				$root = $options->root;
 
-				$container = $hook->getParam('container');
-				$writing_subtype = $hook->getParam('subtype');
+				$container = $event->getParam('container');
+				$writing_subtype = $event->getParam('subtype');
 
 				if ($writing_subtype !== $subtype) {
 					return null;
 				}
 
-				$value = $hook->getValue();
+				$value = $event->getValue();
 				if (!isset($value)) {
 					$value = true;
 				}
@@ -284,7 +285,7 @@ class GroupsService {
 	 * @return void
 	 */
 	protected function cleanup() {
-		elgg_unregister_plugin_hook_handler('entity:url', 'group', 'groups_set_url');
+		elgg_unregister_event_handler('entity:url', 'group', 'groups_set_url');
 
 		elgg_unregister_menu_item('site', 'groups');
 

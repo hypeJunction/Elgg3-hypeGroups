@@ -103,7 +103,7 @@ if ($entity && $entity->guid && ($owner_guid == elgg_get_logged_in_user_guid() |
 	$fields[] = $owner_guid_options;
 }
 
-$fields = elgg_trigger_plugin_hook('fields:access', 'group', $vars, $fields);
+$fields = elgg_trigger_event_results('fields:access', 'group', $vars, $fields);
 
 foreach ($fields as $field) {
 	echo elgg_view_field($field);

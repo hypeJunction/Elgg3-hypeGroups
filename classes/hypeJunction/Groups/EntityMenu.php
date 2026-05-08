@@ -2,29 +2,29 @@
 
 namespace hypeJunction\Groups;
 
-use Elgg\Hook;
+use Elgg\Event;
 
 class EntityMenu {
 
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$entity = $hook->getEntityParam();
+		$entity = $event->getEntityParam();
 
 		if (!$entity instanceof \ElggGroup) {
 			return;
 		}
 
-		$menu = $hook->getValue();
+		$menu = $event->getValue();
 
 		if ($entity->canEdit()) {
-			$menu[] = \ElggMenuItem::factory([
+			$menu->add(\ElggMenuItem::factory([
 				'name' => 'edit',
 				'text' => elgg_echo('edit'),
 				'href' => elgg_generate_url("edit:group:$entity->subtype", [
 					'guid' => $entity->guid,
 				]),
 				'icon' => 'pencil',
-			]);
+			]));
 
 			if (!$entity->isPublicMembership()) {
 				$count = elgg_get_entities([
@@ -41,7 +41,7 @@ class EntityMenu {
 					$title = elgg_echo('groups:membershiprequests:pending', [$count]);
 				}
 
-				$menu[] = \ElggMenuItem::factory([
+				$menu->add(\ElggMenuItem::factory([
 					'name' => 'membership_requests',
 					'text' => $text,
 					'badge' => $count ? $count : null,
@@ -50,12 +50,12 @@ class EntityMenu {
 						'guid' => $entity->guid,
 					]),
 					'icon' => 'inbox',
-				]);
+				]));
 			}
 		}
 
 		if ($entity->canDelete()) {
-			$menu[] = \ElggMenuItem::factory([
+			$menu->add(\ElggMenuItem::factory([
 				'name' => 'delete',
 				'text' => elgg_echo('delete'),
 				'href' => elgg_generate_action_url('entity/delete', ['guid' => $entity->guid]),
@@ -63,7 +63,7 @@ class EntityMenu {
 				'icon' => 'trash',
 				'link_class' => 'elgg-state elgg-state-danger',
 				'priority' => 900,
-			]);
+			]));
 		}
 
 		$user = elgg_get_logged_in_user_entity();
@@ -73,7 +73,7 @@ class EntityMenu {
 			if ($leave) {
 				$leave->addLinkClass('elgg-state elgg-state-danger');
 				$leave->setPriority(900);
-				$menu[] = $leave;
+				$menu->add($leave);
 			}
 		}
 

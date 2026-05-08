@@ -13,17 +13,17 @@ class GroupsServiceTest extends IntegrationTestCase {
     /** @var GroupsService */
     private $svc;
 
-    public function up() {
+    public function up(): void {
         $this->svc = new GroupsService();
     }
 
-    public function down() {}
+    public function down(): void {}
 
     public function getPluginID(): string {
         return '';
     }
 
-    public function testRegisterSubtypeStoresConfig() {
+    public function testRegisterSubtypeStoresConfig(): void {
         $this->svc->registerSubtype('team', [
             'identifier' => 'teams',
             'labels' => ['en' => ['item' => 'Team', 'collection' => 'Teams']],
@@ -34,7 +34,7 @@ class GroupsServiceTest extends IntegrationTestCase {
         $this->assertInstanceOf(GroupConfig::class, $all['team']);
     }
 
-    public function testRegisterSubtypeAcceptsGroupConfigObject() {
+    public function testRegisterSubtypeAcceptsGroupConfigObject(): void {
         $config = new GroupConfig(['identifier' => 'clubs']);
         $this->svc->registerSubtype('club', $config);
 
@@ -42,7 +42,7 @@ class GroupsServiceTest extends IntegrationTestCase {
         $this->assertSame($config, $all['club']);
     }
 
-    public function testGetSubtypesReturnsAllSubtypeKeys() {
+    public function testGetSubtypesReturnsAllSubtypeKeys(): void {
         $this->svc->registerSubtype('group', ['identifier' => 'groups']);
         $this->svc->registerSubtype('team', ['identifier' => 'teams']);
 
@@ -51,7 +51,7 @@ class GroupsServiceTest extends IntegrationTestCase {
         $this->assertContains('team', $subtypes);
     }
 
-    public function testGetSubtypesByIdentifierFiltersCorrectly() {
+    public function testGetSubtypesByIdentifierFiltersCorrectly(): void {
         $this->svc->registerSubtype('group', ['identifier' => 'groups']);
         $this->svc->registerSubtype('team', ['identifier' => 'teams']);
 
@@ -64,14 +64,14 @@ class GroupsServiceTest extends IntegrationTestCase {
         $this->assertNotContains('group', $teams);
     }
 
-    public function testGetSubtypesByIdentifierReturnsEmptyForUnknownIdentifier() {
+    public function testGetSubtypesByIdentifierReturnsEmptyForUnknownIdentifier(): void {
         $this->svc->registerSubtype('group', ['identifier' => 'groups']);
 
         $result = $this->svc->getSubtypes('nonexistent');
         $this->assertSame([], $result);
     }
 
-    public function testUnregisterSubtypeRemovesEntry() {
+    public function testUnregisterSubtypeRemovesEntry(): void {
         $this->svc->registerSubtype('group', ['identifier' => 'groups']);
         $this->svc->registerSubtype('team', ['identifier' => 'teams']);
 
@@ -82,7 +82,7 @@ class GroupsServiceTest extends IntegrationTestCase {
         $this->assertContains('group', $subtypes);
     }
 
-    public function testMagicGetReturnsConfigForRegisteredSubtype() {
+    public function testMagicGetReturnsConfigForRegisteredSubtype(): void {
         $this->svc->registerSubtype('group', ['identifier' => 'groups']);
 
         $config = $this->svc->group;
@@ -90,12 +90,12 @@ class GroupsServiceTest extends IntegrationTestCase {
         $this->assertEquals('groups', $config->identifier);
     }
 
-    public function testMagicGetReturnsNullForUnknownSubtype() {
+    public function testMagicGetReturnsNullForUnknownSubtype(): void {
         $result = $this->svc->nonexistent;
         $this->assertNull($result);
     }
 
-    public function testAllReturnsEmptyArrayWhenNoSubtypesRegistered() {
+    public function testAllReturnsEmptyArrayWhenNoSubtypesRegistered(): void {
         $this->assertSame([], $this->svc->all());
     }
 }
