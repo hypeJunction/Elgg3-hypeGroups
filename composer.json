@@ -2,24 +2,26 @@
 	"name": "hypejunction/hypegroups",
 	"version": "3.1.1",
 	"type": "elgg-plugin",
-	"description": "Extended group functionalities for Elgg",
-	"homepage": "http://hypejunction.com",
+	"description": "Extended group functionality for Elgg — subtypes, hierarchies, fields, and tools management.",
+	"homepage": "https://github.com/hypeJunction/hypegroups",
 	"keywords": [
-		"elgg", "plugin", "subtypes", "groups"
+		"elgg",
+		"plugin",
+		"subtypes",
+		"groups"
 	],
 	"license": "proprietary",
 	"authors": [
 		{
 			"name": "Ismayil Khayredinov",
-			"email": "info@hypejunction.com"
+			"email": "ismayil.khayredinov@gmail.com"
 		}
 	],
-    "extra": {
-        "installer-name": "hypeGroups"
-    },
+	"extra": {
+		"installer-name": "hypeGroups"
+	},
 	"require": {
 		"php": ">=7.0",
 		"composer/installers": "~1.0"
 	}
 }
-

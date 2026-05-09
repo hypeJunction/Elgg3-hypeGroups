@@ -4,14 +4,14 @@
 	<name>hypeGroups</name>
 	<id>hypeGroups</id>
 
-	<description>Extended group functionality</description>
+	<description>Extended group functionality for Elgg — subtypes, hierarchies, fields, and tools management.</description>
 	<category>groups</category>
 	<version type="dist">3.1.1</version>
 
-	<author>Ismayil Khayredinov (inof@hypejunction.com)</author>
-	<website>http://www.hypejunction.com/</website>
+	<author>Ismayil Khayredinov (ismayil.khayredinov@gmail.com)</author>
+	<website>https://github.com/hypeJunction/hypegroups</website>
 	<copyright>(c) 2015-2018 Ismayil Khayredinov</copyright>
-	<license>https://hypejunction.com/license</license>
+	<license>https://github.com/hypeJunction/hypegroups</license>
 
 	<requires>
 		<type>elgg_release</type>
