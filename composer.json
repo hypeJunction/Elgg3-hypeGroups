@@ -2,8 +2,8 @@
 	"name": "hypejunction/hypegroups",
 	"version": "3.1.1",
 	"type": "elgg-plugin",
-	"description": "Extended group functionality for Elgg — subtypes, hierarchies, fields, and tools management.",
-	"homepage": "https://github.com/hypeJunction/hypegroups",
+	"description": "Extended group functionality for Elgg \u2014 subtypes, hierarchies, fields, and tools management.",
+	"homepage": "https://github.com/hypeJunction/Elgg3-hypeGroups",
 	"keywords": [
 		"elgg",
 		"plugin",
