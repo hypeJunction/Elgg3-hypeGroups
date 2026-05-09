@@ -1,6 +1,10 @@
+:root {
+	--groups-color-white: #fff;
+}
+
 .elgg-module-group > .elgg-head .elgg-badge {
 	background: var(--elgg-background-color-highlight);
-	color: #fff;
+	color: var(--groups-color-white);
 	margin-left: 0.5rem;
 	padding: 2px 7px;
 }
@@ -15,7 +19,7 @@
 
 .groups-profile-fields {
 	border: 1px solid var(--elgg-border-color-soft);
-	background: #fff;
+	background: var(--groups-color-white);
 	display: grid;
 	grid-gap: 1rem;
 	grid-template-columns:  repeat(auto-fill, 50%);
