@@ -1,5 +1,5 @@
 .elgg-module-group > .elgg-head .elgg-badge {
-	background: $(background-color-highlight);
+	background: var(--elgg-background-color-highlight);
 	color: #fff;
 	margin-left: 0.5rem;
 	padding: 2px 7px;
@@ -14,7 +14,7 @@
 }
 
 .groups-profile-fields {
-	border: 1px solid $(border-color-soft);
+	border: 1px solid var(--elgg-border-color-soft);
 	background: #fff;
 	display: grid;
 	grid-gap: 1rem;
