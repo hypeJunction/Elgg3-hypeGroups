@@ -18,7 +18,7 @@
         }
     ],
     "extra": {
-        "installer-name": "hypeGroups"
+        "installer-name": "hypegroups"
     },
     "require": {
         "php": ">=8.3",
