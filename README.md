@@ -3,7 +3,7 @@ hypeGroups
 
 Extended group functionality for Elgg — subtypes, hierarchies, fields, and tools management.
 
-![Elgg 3.x](https://img.shields.io/badge/Elgg-3.x-orange.svg?style=flat-square)
+![Elgg 7.x](https://img.shields.io/badge/Elgg-7.x-orange.svg?style=flat-square)
 
 ## Features
 
@@ -63,3 +63,9 @@ You can put multiple subtypes into a collection by assigning them to the same `i
 ### Fields
 
 Fields are managed by hypePost. Please see the documentation there for more information.
+
+## Compatibility
+
+| Plugin version | Elgg version |
+|---|---|
+| current | 7.x |
