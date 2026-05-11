@@ -1,6 +1,5 @@
 {
     "name": "hypejunction/hypegroups",
-    "version": "7.0.0",
     "type": "elgg-plugin",
     "description": "Extended group functionality for Elgg — subtypes, hierarchies, fields, and tools management.",
     "homepage": "https://github.com/hypeJunction/Elgg3-hypeGroups",
