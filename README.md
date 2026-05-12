@@ -3,7 +3,7 @@ hypeGroups
 
 Extended group functionality for Elgg — subtypes, hierarchies, fields, and tools management.
 
-![Elgg 3.x](https://img.shields.io/badge/Elgg-3.x-orange.svg?style=flat-square)
+![Elgg 5.x](https://img.shields.io/badge/Elgg-5.x-orange.svg?style=flat-square)
 
 ## Features
 
