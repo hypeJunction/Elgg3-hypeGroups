@@ -8,11 +8,19 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 class GroupGuidField extends Field {
 
-	public function save(ElggEntity $entity, ParameterBag $parameters) {
+	/**
+     * @param ElggEntity $entity
+     * @param ParameterBag $parameters
+     */
+    public function save(ElggEntity $entity, ParameterBag $parameters) {
 
 	}
 
-	public function retrieve(ElggEntity $entity) {
+	/**
+     * @param ElggEntity $entity
+     * @return mixed
+     */
+    public function retrieve(ElggEntity $entity) {
 		return $entity->guid;
 	}
 
