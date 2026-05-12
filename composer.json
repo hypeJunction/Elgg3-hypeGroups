@@ -5,7 +5,10 @@
 	"description": "Extended group functionalities for Elgg",
 	"homepage": "http://hypejunction.com",
 	"keywords": [
-		"elgg", "plugin", "subtypes", "groups"
+		"elgg",
+		"plugin",
+		"subtypes",
+		"groups"
 	],
 	"license": "proprietary",
 	"authors": [
@@ -14,12 +17,12 @@
 			"email": "info@hypejunction.com"
 		}
 	],
-    "extra": {
-        "installer-name": "hypeGroups"
-    },
+	"extra": {
+		"installer-name": "hypeGroups"
+	},
 	"require": {
-		"php": ">=7.0",
-		"composer/installers": "~1.0"
+		"composer/installers": "~1.0",
+		"php": ">=7.4",
+		"elgg/elgg": "^4.0"
 	}
 }
-
