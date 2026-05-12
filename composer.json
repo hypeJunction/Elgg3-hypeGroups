@@ -22,7 +22,7 @@
 	},
 	"require": {
 		"composer/installers": "~1.0",
-		"php": ">=8.2",
+		"php": ">=8.1",
 		"elgg/elgg": "~6.1.0"
 	}
 }
