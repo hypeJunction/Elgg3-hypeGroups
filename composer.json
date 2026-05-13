@@ -1,28 +1,28 @@
 {
-	"name": "hypejunction/hypegroups",
-	"version": "3.1.1",
-	"type": "elgg-plugin",
-	"description": "Extended group functionalities for Elgg",
-	"homepage": "http://hypejunction.com",
-	"keywords": [
-		"elgg",
-		"plugin",
-		"subtypes",
-		"groups"
-	],
-	"license": "proprietary",
-	"authors": [
-		{
-			"name": "Ismayil Khayredinov",
-			"email": "info@hypejunction.com"
-		}
-	],
-	"extra": {
-		"installer-name": "hypeGroups"
-	},
-	"require": {
-		"composer/installers": "~1.0",
-		"php": ">=7.4",
-		"elgg/elgg": "^4.0"
-	}
+    "name": "hypejunction/hypegroups",
+    "version": "4.0.0",
+    "type": "elgg-plugin",
+    "description": "Extended group functionalities for Elgg",
+    "homepage": "http://hypejunction.com",
+    "keywords": [
+        "elgg",
+        "plugin",
+        "subtypes",
+        "groups"
+    ],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Ismayil Khayredinov",
+            "email": "info@hypejunction.com"
+        }
+    ],
+    "extra": {
+        "installer-name": "hypeGroups"
+    },
+    "require": {
+        "composer/installers": "~1.0",
+        "php": ">=7.4",
+        "elgg/elgg": "^4.0"
+    }
 }
