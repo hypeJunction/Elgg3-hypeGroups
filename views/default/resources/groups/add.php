@@ -35,7 +35,7 @@ $vars['context'] = \hypeJunction\Fields\Field::CONTEXT_CREATE_FORM;
 if (elgg_action_exists("groups/edit/$subtype")) {
 	$action = "groups/edit/$subtype";
 } else {
-	$action = "groups/edit";
+	$action = 'groups/edit';
 }
 
 $content = elgg_view_form('post/save', [

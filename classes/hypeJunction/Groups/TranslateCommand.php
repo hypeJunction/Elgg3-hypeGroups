@@ -5,6 +5,9 @@ namespace hypeJunction\Groups;
 use Elgg\Cli\Command;
 use Symfony\Component\Console\Input\InputOption;
 
+/**
+ * CLI command to translate group profile fields.
+ */
 class TranslateCommand extends Command {
 
 	/**
@@ -28,8 +31,8 @@ class TranslateCommand extends Command {
 		$conf = GroupsService::instance()->all();
 
 		foreach ($all_translations as $language => $translations) {
-			$original_str = $translations["groups:group"];
-			$original_str_plural = $translations["groups"];
+			$original_str = $translations['groups:group'];
+			$original_str_plural = $translations['groups'];
 
 			foreach ($conf as $subtype => $options) {
 				$identifier = $options->identifier;
@@ -42,7 +45,7 @@ class TranslateCommand extends Command {
 				$subtype_str_plural = $options->labels['en']['collection'];
 
 				foreach ($translations as $key => $translation) {
-					$identifier_key = preg_replace("/^(groups)/", $identifier, $key);
+					$identifier_key = preg_replace('/^(groups)/', $identifier, $key);
 
 					if ($identifier_key == $key) {
 						continue;
@@ -62,7 +65,7 @@ class TranslateCommand extends Command {
 				}
 			}
 
-			$path = $this->option('path') ? : elgg_get_cache_path();
+			$path = $this->option('path') ?: elgg_get_cache_path();
 			$dir = rtrim($path, '/') . '/subgroups/languages/';
 
 			if (!is_dir($dir)) {
@@ -77,5 +80,4 @@ class TranslateCommand extends Command {
 			$this->write("Translations generated in {$dir}{$language}.php");
 		}
 	}
-
 }

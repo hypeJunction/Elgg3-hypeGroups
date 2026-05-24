@@ -8,6 +8,9 @@ use ElggGroup;
 use hypeJunction\Fields\Field;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
+/**
+ * Group tools input field.
+ */
 class GroupToolsField extends Field {
 
 	/**

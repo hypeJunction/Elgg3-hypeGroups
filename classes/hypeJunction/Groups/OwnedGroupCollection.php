@@ -4,6 +4,9 @@ namespace hypeJunction\Groups;
 
 use hypeJunction\Lists\Filters\IsAdministeredBy;
 
+/**
+ * Collection of groups owned by the user.
+ */
 class OwnedGroupCollection extends DefaultGroupCollection {
 
 	/**
@@ -53,5 +56,4 @@ class OwnedGroupCollection extends DefaultGroupCollection {
 
 		return parent::getQueryOptions($options);
 	}
-
 }

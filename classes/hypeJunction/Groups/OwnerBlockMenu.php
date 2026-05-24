@@ -5,8 +5,18 @@ namespace hypeJunction\Groups;
 use Elgg\Event;
 use hypeJunction\Lists\CollectionInterface;
 
+/**
+ * Builds entries on the group owner-block menu.
+ */
 class OwnerBlockMenu {
 
+	/**
+	 * Register entries on the group owner-block menu.
+	 *
+	 * @param Event $event Menu event
+	 *
+	 * @return \Elgg\Menu\MenuItems|null
+	 */
 	public function __invoke(Event $event) {
 
 		$menu = $event->getValue();
@@ -46,7 +56,6 @@ class OwnerBlockMenu {
 			]));
 
 			foreach ($subtypes as $subtype => $conf) {
-
 				$joined = $svc->getJoinedGroups($owner, [
 					'count' => true,
 					'subtypes' => $subtype,
@@ -71,7 +80,7 @@ class OwnerBlockMenu {
 					if ($owned) {
 						$menu->add(\ElggMenuItem::factory([
 							'name' => "groups:$subtype:owned",
-							'parent_name' => "groups",
+							'parent_name' => 'groups',
 							'text' => elgg_echo("{$conf->identifier}:owned"),
 							'href' => elgg_generate_url("collection:group:$subtype:owner", [
 								'username' => $owner->username,

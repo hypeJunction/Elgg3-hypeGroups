@@ -4,6 +4,9 @@ namespace hypeJunction\Groups;
 
 use Elgg\DefaultPluginBootstrap;
 
+/**
+ * Plugin bootstrap.
+ */
 class Bootstrap extends DefaultPluginBootstrap {
 
 	/**

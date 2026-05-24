@@ -4,8 +4,18 @@ namespace hypeJunction\Groups;
 
 use Elgg\Event;
 
+/**
+ * Builds entries on the group entity menu.
+ */
 class EntityMenu {
 
+	/**
+	 * Register entries on the group entity menu.
+	 *
+	 * @param Event $event Menu event
+	 *
+	 * @return \Elgg\Menu\MenuItems|null
+	 */
 	public function __invoke(Event $event) {
 
 		$entity = $event->getEntityParam();

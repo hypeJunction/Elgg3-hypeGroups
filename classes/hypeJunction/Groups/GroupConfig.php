@@ -23,7 +23,7 @@ class GroupConfig extends \ArrayObject {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function __construct($input = [], $flags = \ArrayObject::ARRAY_AS_PROPS, $iterator_class = "ArrayIterator") {
+	public function __construct($input = [], $flags = \ArrayObject::ARRAY_AS_PROPS, $iterator_class = 'ArrayIterator') {
 		$input = $this->normalize($input);
 		parent::__construct($input, $flags, $iterator_class);
 	}
@@ -49,5 +49,4 @@ class GroupConfig extends \ArrayObject {
 
 		return array_merge($defaults, $input);
 	}
-
 }

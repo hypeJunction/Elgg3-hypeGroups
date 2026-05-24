@@ -8,6 +8,9 @@ use ElggGroup;
 use hypeJunction\Fields\Field;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
+/**
+ * Group access input field.
+ */
 class GroupAccessField extends Field {
 
 	/**
