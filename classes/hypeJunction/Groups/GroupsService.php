@@ -314,7 +314,7 @@ class GroupsService {
 	 * @return string
 	 */
 	public function getPageIdentifier() {
-		$url = current_page_url();
+		$url = elgg_get_current_url();
 		$path = substr($url, strlen(\elgg_get_site_url()));
 
 		$parts = explode('/', $path);
