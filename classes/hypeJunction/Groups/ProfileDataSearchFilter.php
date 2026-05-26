@@ -27,7 +27,7 @@ class ProfileDataSearchFilter implements FilterInterface {
 	 */
 	public static function build(\ElggEntity $target = null, array $params = []) {
 
-		$profile = (array) elgg_extract('profile', $params, []);
+		$profile = (array) \elgg_extract('profile', $params, []);
 
 		$handler = function (QueryBuilder $qb) use ($profile) {
 

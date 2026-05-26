@@ -27,7 +27,7 @@ class JoinedGroupCollection extends DefaultGroupCollection {
 	 * {@inheritdoc}
 	 */
 	public function getURL() {
-		return elgg_generate_url($this->getId(), [
+		return \elgg_generate_url($this->getId(), [
 			'username' => $this->getTarget()->username,
 		]);
 	}
@@ -39,10 +39,10 @@ class JoinedGroupCollection extends DefaultGroupCollection {
 	public function getDisplayName() {
 		$identifier = $this->getPageIdentifier();
 
-		if ($this->getTarget()->guid == elgg_get_logged_in_user_guid()) {
-			return elgg_echo("$identifier:yours");
+		if ($this->getTarget()->guid == \elgg_get_logged_in_user_guid()) {
+			return \elgg_echo("$identifier:yours");
 		} else if ($this->getTarget()) {
-			return elgg_echo("$identifier:user", [$this->getTarget()->getDisplayName()]);
+			return \elgg_echo("$identifier:user", [$this->getTarget()->getDisplayName()]);
 		}
 	}
 

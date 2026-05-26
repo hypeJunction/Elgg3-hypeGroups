@@ -37,17 +37,17 @@ class GroupsTabs {
 
 		$tabs->add(\ElggMenuItem::factory([
 			'name' => 'groups:all',
-			'text' => elgg_echo('all'),
-			'href' => elgg_generate_url("collection:group:$subtype:all"),
+			'text' => \elgg_echo('all'),
+			'href' => \elgg_generate_url("collection:group:$subtype:all"),
 			'priority' => 100,
 		]));
 
-		$user = elgg_get_logged_in_user_entity();
+		$user = \elgg_get_logged_in_user_entity();
 		if ($user) {
 			$tabs->add(\ElggMenuItem::factory([
 				'name' => 'groups:mine',
-				'text' => elgg_echo('mine'),
-				'href' => elgg_generate_url("collection:group:$subtype:member", [
+				'text' => \elgg_echo('mine'),
+				'href' => \elgg_generate_url("collection:group:$subtype:member", [
 					'username' => $user->username,
 				]),
 				'priority' => 200,
