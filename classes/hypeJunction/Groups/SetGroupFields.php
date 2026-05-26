@@ -46,7 +46,7 @@ class SetGroupFields {
 			'priority' => 10,
 		]));
 
-		$config = (array) elgg_get_config('group');
+		$config = (array) \elgg_get_config('group');
 
 		foreach ($config as $prop => $type) {
 			$fields->add($prop, new MetaField([

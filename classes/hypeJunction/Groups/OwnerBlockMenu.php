@@ -24,7 +24,7 @@ class OwnerBlockMenu {
 			}, $subtypes);
 
 			$child_menu = [];
-			if (elgg_is_active_plugin('hypeHero')) {
+			if (\elgg_is_active_plugin('hypeHero')) {
 				$child_menu = [
 					'display' => 'dropdown',
 					'class' => 'elgg-menu-hover',
@@ -39,7 +39,7 @@ class OwnerBlockMenu {
 
 			$menu[] = \ElggMenuItem::factory([
 				'name' => 'groups',
-				'text' => elgg_echo('groups'),
+				'text' => \elgg_echo('groups'),
 				'href' => 'javascript:',
 				'child_menu' => $child_menu,
 				'selected' => in_array($svc->getPageIdentifier(), $identifiers),
@@ -56,8 +56,8 @@ class OwnerBlockMenu {
 					$menu[] = \ElggMenuItem::factory([
 						'name' => "groups:$subtype",
 						'parent_name' => 'groups',
-						'text' => elgg_echo("{$conf->identifier}:yours"),
-						'href' => elgg_generate_url("collection:group:$subtype:member", [
+						'text' => \elgg_echo("{$conf->identifier}:yours"),
+						'href' => \elgg_generate_url("collection:group:$subtype:member", [
 							'username' => $owner->username,
 						]),
 						'badge' => $joined,
@@ -72,8 +72,8 @@ class OwnerBlockMenu {
 						$menu[] = \ElggMenuItem::factory([
 							'name' => "groups:$subtype:owned",
 							'parent_name' => "groups",
-							'text' => elgg_echo("{$conf->identifier}:owned"),
-							'href' => elgg_generate_url("collection:group:$subtype:owner", [
+							'text' => \elgg_echo("{$conf->identifier}:owned"),
+							'href' => \elgg_generate_url("collection:group:$subtype:owner", [
 								'username' => $owner->username,
 							]),
 							'badge' => $owned,
@@ -83,8 +83,8 @@ class OwnerBlockMenu {
 					$menu[] = \ElggMenuItem::factory([
 						'name' => "groups:$subtype",
 						'parent_name' => 'groups',
-						'text' => elgg_echo("add:group:$subtype"),
-						'href' => elgg_generate_url("add:group:$subtype", [
+						'text' => \elgg_echo("add:group:$subtype"),
+						'href' => \elgg_generate_url("add:group:$subtype", [
 							'container_guid' => $owner->guid,
 						]),
 						'icon' => 'plus',

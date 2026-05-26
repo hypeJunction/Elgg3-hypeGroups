@@ -74,7 +74,7 @@ class PermissionsTest extends IntegrationTestCase {
 
     public function testContainerPermissionsReturnsFalseWhenLimitedGroupsEnabledForRegularUser() {
         // Set limited_groups = 'yes' on the core groups plugin
-        $groups_plugin = elgg_get_plugin_from_id('groups');
+        $groups_plugin = \elgg_get_plugin_from_id('groups');
         if (!$groups_plugin) {
             $this->markTestSkipped('Core groups plugin not active');
         }
@@ -83,7 +83,7 @@ class PermissionsTest extends IntegrationTestCase {
         $groups_plugin->setSetting('limited_groups', 'yes');
 
         $user = $this->createUser();
-        elgg_get_session()->setLoggedInUser($user);
+        \elgg_get_session()->setLoggedInUser($user);
 
         $hook = $this->getMockBuilder(\Elgg\Hook::class)->getMock();
         $hook->method('getValue')->willReturn(true);
@@ -95,11 +95,11 @@ class PermissionsTest extends IntegrationTestCase {
 
         // Restore
         $groups_plugin->setSetting('limited_groups', $original);
-        elgg_get_session()->removeLoggedInUser();
+        \elgg_get_session()->removeLoggedInUser();
     }
 
     public function testContainerPermissionsReturnsNullWhenLimitedGroupsNotSet() {
-        $groups_plugin = elgg_get_plugin_from_id('groups');
+        $groups_plugin = \elgg_get_plugin_from_id('groups');
         if (!$groups_plugin) {
             $this->markTestSkipped('Core groups plugin not active');
         }
@@ -108,7 +108,7 @@ class PermissionsTest extends IntegrationTestCase {
         $groups_plugin->setSetting('limited_groups', 'no');
 
         $user = $this->createUser();
-        elgg_get_session()->setLoggedInUser($user);
+        \elgg_get_session()->setLoggedInUser($user);
 
         $hook = $this->getMockBuilder(\Elgg\Hook::class)->getMock();
         $hook->method('getValue')->willReturn(true);
@@ -119,6 +119,6 @@ class PermissionsTest extends IntegrationTestCase {
         $this->assertNull($result, 'Handler should return null when setting is not "yes"');
 
         $groups_plugin->setSetting('limited_groups', $original);
-        elgg_get_session()->removeLoggedInUser();
+        \elgg_get_session()->removeLoggedInUser();
     }
 }

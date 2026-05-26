@@ -34,19 +34,19 @@ class GroupAccessField extends Field {
 		$svc = elgg()->groups;
 		/* @var $svc GroupsService */
 
-		$svc->setGroupAdmins($entity, elgg_extract('admin_guids', $values, []));
+		$svc->setGroupAdmins($entity, \elgg_extract('admin_guids', $values, []));
 
 		// Group membership - should these be treated with same constants as access permissions?
-		$value = elgg_extract('membership', $values);
+		$value = \elgg_extract('membership', $values);
 		if ($entity->membership === null || $value !== null) {
 			$is_public_membership = ($value == ACCESS_PUBLIC);
 			$entity->membership = $is_public_membership ? ACCESS_PUBLIC : ACCESS_PRIVATE;
 		}
 
-		$entity->setContentAccessMode((string) elgg_extract('content_access_mode', $values));
+		$entity->setContentAccessMode((string) \elgg_extract('content_access_mode', $values));
 
-		$user = elgg_get_logged_in_user_entity();
-		$value = elgg_extract('owner_guid', $values, $user->guid);
+		$user = \elgg_get_logged_in_user_entity();
+		$value = \elgg_extract('owner_guid', $values, $user->guid);
 
 		$owner = get_entity($value);
 
@@ -77,8 +77,8 @@ class GroupAccessField extends Field {
 		// Invisible group support
 		// is an odd requirement and should be removed. Either the acl creation happens
 		// in the action or the visibility moves to a plugin hook
-		if (elgg_get_plugin_setting('hidden_groups', 'groups') == 'yes') {
-			$value = elgg_extract('access_id', $values);
+		if (\elgg_get_plugin_setting('hidden_groups', 'groups') == 'yes') {
+			$value = \elgg_extract('access_id', $values);
 
 			if (isset($value)) {
 				$visibility = (int) $value;
@@ -118,8 +118,8 @@ class GroupAccessField extends Field {
 				'access_id' => ACCESS_PUBLIC,
 				'membership' => ACCESS_PRIVATE,
 				'content_access_mode' => ElggGroup::CONTENT_ACCESS_MODE_MEMBERS_ONLY,
-				'owner_guid' => elgg_get_logged_in_user_guid(),
-				'admin_guids' => elgg_get_logged_in_user_guid(),
+				'owner_guid' => \elgg_get_logged_in_user_guid(),
+				'admin_guids' => \elgg_get_logged_in_user_guid(),
 			];
 		}
 

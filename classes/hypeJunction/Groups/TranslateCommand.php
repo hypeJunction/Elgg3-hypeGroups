@@ -22,8 +22,8 @@ class TranslateCommand extends Command {
 	 * {@inheritdoc}
 	 */
 	protected function command() {
-		_elgg_services()->translator->setCurrentLanguage('en');
-		$all_translations = _elgg_services()->translator->getLoadedTranslations();
+		\_elgg_services()->translator->setCurrentLanguage('en');
+		$all_translations = \_elgg_services()->translator->getLoadedTranslations();
 
 		$conf = GroupsService::instance()->all();
 
@@ -62,7 +62,7 @@ class TranslateCommand extends Command {
 				}
 			}
 
-			$path = $this->option('path') ? : elgg_get_cache_path();
+			$path = $this->option('path') ? : \elgg_get_cache_path();
 			$dir = rtrim($path, '/') . '/subgroups/languages/';
 
 			if (!is_dir($dir)) {

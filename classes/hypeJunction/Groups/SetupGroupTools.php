@@ -27,7 +27,7 @@ class SetupGroupTools {
 
 		if ($config->identifier && $config->identifier != 'groups') {
 			foreach ($tools as $tool) {
-				$tool->label = elgg_echo("{$config->identifier}:tool:{$tool->name}");
+				$tool->label = \elgg_echo("{$config->identifier}:tool:{$tool->name}");
 			}
 		}
 

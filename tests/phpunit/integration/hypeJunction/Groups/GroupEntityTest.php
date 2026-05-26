@@ -18,7 +18,7 @@ class GroupEntityTest extends IntegrationTestCase {
     }
 
     private function skipIfPluginMissing(): void {
-        if (!elgg_get_plugin_from_id('hypegroups') || !elgg_get_plugin_from_id('hypegroups')->isActive()) {
+        if (!\elgg_get_plugin_from_id('hypegroups') || !\elgg_get_plugin_from_id('hypegroups')->isActive()) {
             $this->markTestSkipped('hypegroups not active in test DB');
         }
     }
@@ -31,11 +31,11 @@ class GroupEntityTest extends IntegrationTestCase {
         $group->name = 'Test Group';
         $group->access_id = ACCESS_PUBLIC;
         $group->owner_guid = $owner->guid;
-        $group->container_guid = elgg_get_site_entity()->guid;
+        $group->container_guid = \elgg_get_site_entity()->guid;
         $this->assertTrue((bool) $group->save());
 
         // Flush cache and reload
-        _elgg_services()->entityCache->delete($group->guid);
+        \_elgg_services()->entityCache->delete($group->guid);
         $loaded = get_entity($group->guid);
 
         $this->assertInstanceOf(Group::class, $loaded,
@@ -54,14 +54,14 @@ class GroupEntityTest extends IntegrationTestCase {
         $group->name = 'CRUD Test Group';
         $group->access_id = ACCESS_PUBLIC;
         $group->owner_guid = $owner->guid;
-        $group->container_guid = elgg_get_site_entity()->guid;
+        $group->container_guid = \elgg_get_site_entity()->guid;
         $group->custom_setting = 'test_value';
         $saved = $group->save();
         $this->assertTrue((bool) $saved);
         $guid = $group->guid;
 
         // Read
-        _elgg_services()->entityCache->delete($guid);
+        \_elgg_services()->entityCache->delete($guid);
         $loaded = get_entity($guid);
         $this->assertInstanceOf(Group::class, $loaded);
         $this->assertEquals('CRUD Test Group', $loaded->name);
@@ -70,7 +70,7 @@ class GroupEntityTest extends IntegrationTestCase {
         // Update
         $loaded->name = 'Updated Group Name';
         $this->assertTrue((bool) $loaded->save());
-        _elgg_services()->entityCache->delete($guid);
+        \_elgg_services()->entityCache->delete($guid);
         $updated = get_entity($guid);
         $this->assertEquals('Updated Group Name', $updated->name);
 

@@ -31,7 +31,7 @@ class GroupsService {
 	 * @return GroupConfig|null
 	 */
 	public function __get($subtype) {
-		return elgg_extract($subtype, $this->subtypes);
+		return \elgg_extract($subtype, $this->subtypes);
 	}
 
 	/**
@@ -117,14 +117,14 @@ class GroupsService {
 
 		foreach ($this->subtypes as $subtype => $options) {
 			$class = $options->class;
-			elgg_set_entity_class('group', $subtype, $class);
-			elgg_register_entity_type('group', $subtype);
+			\elgg_set_entity_class('group', $subtype, $class);
+			\elgg_register_entity_type('group', $subtype);
 
-			elgg_register_plugin_hook_handler('uses:comments', "group:$subtype", [\Elgg\Values::class, 'getFalse']);
-			elgg_register_plugin_hook_handler('uses:autosave', "group:$subtype", [\Elgg\Values::class, 'getFalse']);
-			elgg_register_plugin_hook_handler('uses:location', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
-			elgg_register_plugin_hook_handler('uses:icon', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
-			elgg_register_plugin_hook_handler('uses:cover', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
+			\elgg_register_plugin_hook_handler('uses:comments', "group:$subtype", [\Elgg\Values::class, 'getFalse']);
+			\elgg_register_plugin_hook_handler('uses:autosave', "group:$subtype", [\Elgg\Values::class, 'getFalse']);
+			\elgg_register_plugin_hook_handler('uses:location', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
+			\elgg_register_plugin_hook_handler('uses:icon', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
+			\elgg_register_plugin_hook_handler('uses:cover', "group:$subtype", [\Elgg\Values::class, 'getTrue']);
 
 			$identifier = $options->identifier;
 
@@ -190,7 +190,7 @@ class GroupsService {
 				],
 			];
 
-			elgg_register_plugin_hook_handler('gatekeeper', "group:$subtype", function (Hook $hook) use ($subtype) {
+			\elgg_register_plugin_hook_handler('gatekeeper', "group:$subtype", function (Hook $hook) use ($subtype) {
 				// Allow access to group profile page
 
 				$entity = $hook->getEntityParam();
@@ -206,38 +206,38 @@ class GroupsService {
 			});
 
 			foreach ($routes as $route_name => $route_options) {
-				if (!_elgg_services()->routes->get($route_name)) {
-					elgg_register_route($route_name, $route_options);
+				if (!\_elgg_services()->routes->get($route_name)) {
+					\elgg_register_route($route_name, $route_options);
 				}
 			}
 
 			$collections = (array) $options->collections;
 
-			elgg_register_collection(
+			\elgg_register_collection(
 				"collection:group:{$subtype}:all",
-				elgg_extract('all', $collections, \hypeJunction\Groups\DefaultGroupCollection::class)
+				\elgg_extract('all', $collections, \hypeJunction\Groups\DefaultGroupCollection::class)
 			);
 
-			elgg_register_collection(
+			\elgg_register_collection(
 				"collection:group:{$subtype}:owner",
-				elgg_extract('owner', $collections, \hypeJunction\Groups\OwnedGroupCollection::class)
+				\elgg_extract('owner', $collections, \hypeJunction\Groups\OwnedGroupCollection::class)
 			);
 
-			elgg_register_collection(
+			\elgg_register_collection(
 				"collection:group:{$subtype}:member",
-				elgg_extract('member', $collections, \hypeJunction\Groups\JoinedGroupCollection::class)
+				\elgg_extract('member', $collections, \hypeJunction\Groups\JoinedGroupCollection::class)
 			);
 
-			elgg_register_collection(
+			\elgg_register_collection(
 				"collection:group:{$subtype}:featured",
-				elgg_extract('featured', $collections, \hypeJunction\Groups\FeaturedGroupCollection::class)
+				\elgg_extract('featured', $collections, \hypeJunction\Groups\FeaturedGroupCollection::class)
 			);
 
 			$labels = (array) $options->labels;
 
 			foreach ($labels as $lang => $lang_labels) {
-				$singular = elgg_extract('item', $lang_labels);
-				$plural = elgg_extract('collection', $lang_labels);
+				$singular = \elgg_extract('item', $lang_labels);
+				$plural = \elgg_extract('collection', $lang_labels);
 
 				add_translation($lang, [
 					"item:group:$subtype" => $singular,
@@ -246,14 +246,14 @@ class GroupsService {
 			}
 
 			if ($options->site_menu) {
-				elgg_register_menu_item('site', [
+				\elgg_register_menu_item('site', [
 					'name' => $identifier,
 					'href' => "$identifier/all",
-					'text' => elgg_echo("collection:group:$subtype"),
+					'text' => \elgg_echo("collection:group:$subtype"),
 				]);
 			}
 
-			elgg_register_plugin_hook_handler('container_logic_check', 'group', function (Hook $hook) use ($subtype, $options) {
+			\elgg_register_plugin_hook_handler('container_logic_check', 'group', function (Hook $hook) use ($subtype, $options) {
 				$parents = (array) $options->parents;
 				$root = $options->root;
 
@@ -284,9 +284,9 @@ class GroupsService {
 	 * @return void
 	 */
 	protected function cleanup() {
-		elgg_unregister_plugin_hook_handler('entity:url', 'group', 'groups_set_url');
+		\elgg_unregister_plugin_hook_handler('entity:url', 'group', 'groups_set_url');
 
-		elgg_unregister_menu_item('site', 'groups');
+		\elgg_unregister_menu_item('site', 'groups');
 
 		$routes = [
 			'default:group:group',
@@ -303,7 +303,7 @@ class GroupsService {
 		];
 
 		foreach ($routes as $route) {
-			elgg_unregister_route($route);
+			\elgg_unregister_route($route);
 		}
 	}
 
@@ -314,7 +314,7 @@ class GroupsService {
 	 */
 	public function getPageIdentifier() {
 		$url = current_page_url();
-		$path = substr($url, strlen(elgg_get_site_url()));
+		$path = substr($url, strlen(\elgg_get_site_url()));
 
 		$parts = explode('/', $path);
 
@@ -340,7 +340,7 @@ class GroupsService {
 
 		$options = array_merge($defaults, $options);
 
-		return elgg_get_entities($options);
+		return \elgg_get_entities($options);
 	}
 
 	/**
@@ -374,7 +374,7 @@ class GroupsService {
 
 		$options['wheres'][] = $filter;
 
-		return elgg_get_entities($options);
+		return \elgg_get_entities($options);
 	}
 
 	/**
@@ -396,7 +396,7 @@ class GroupsService {
 
 		$options = array_merge($defaults, $options);
 
-		return elgg_get_entities($options);
+		return \elgg_get_entities($options);
 	}
 
 	/**
@@ -430,7 +430,7 @@ class GroupsService {
 
 		$options['wheres'][] = $filter;
 
-		return elgg_get_entities($options);
+		return \elgg_get_entities($options);
 	}
 
 	/**

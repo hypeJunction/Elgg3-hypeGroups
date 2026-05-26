@@ -23,10 +23,10 @@ class CollectionTabs {
 			return null;
 		}
 
-		if ($collection->getCollectionType() === 'member' && $collection->getTarget()->guid != elgg_get_logged_in_user_guid()) {
+		if ($collection->getCollectionType() === 'member' && $collection->getTarget()->guid != \elgg_get_logged_in_user_guid()) {
 			return null;
 		}
 
-		return elgg_trigger_plugin_hook('register', 'menu:filter:groups/all', $hook->getParams(), $hook->getValue());
+		return \elgg_trigger_plugin_hook('register', 'menu:filter:groups/all', $hook->getParams(), $hook->getValue());
 	}
 }
