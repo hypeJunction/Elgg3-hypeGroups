@@ -22,7 +22,7 @@ class ProfileDataSearchField extends SearchField {
 		$name = $this->getName();
 		$value = $this->getValue() ? : [];
 
-		$view = elgg_view('input/search/group_profile_data', [
+		$view = \elgg_view('input/search/group_profile_data', [
 			'field' => $this,
 			'name' => $name,
 			'value' => $value,

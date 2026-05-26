@@ -20,7 +20,7 @@ class GroupEntityTest extends IntegrationTestCase {
     public function testGroupEntityClassMappedForGroupSubtype(): void {
         $group = $this->createGroup();
 
-        _elgg_services()->entityCache->delete($group->guid);
+        \_elgg_services()->entityCache->delete($group->guid);
         $loaded = get_entity($group->guid);
 
         $this->assertInstanceOf(Group::class, $loaded,
@@ -32,21 +32,21 @@ class GroupEntityTest extends IntegrationTestCase {
         $group->custom_setting = 'test_value';
         $guid = $group->guid;
 
-        _elgg_services()->entityCache->delete($guid);
+        \_elgg_services()->entityCache->delete($guid);
         $loaded = get_entity($guid);
         $this->assertInstanceOf(Group::class, $loaded);
         $this->assertEquals('CRUD Test Group', $loaded->name);
         $this->assertEquals('test_value', $loaded->custom_setting);
 
         $loaded->name = 'Updated Group Name';
-        elgg_call(ELGG_IGNORE_ACCESS, function() use ($loaded) {
+        \elgg_call(ELGG_IGNORE_ACCESS, function() use ($loaded) {
             $loaded->save();
         });
-        _elgg_services()->entityCache->delete($guid);
+        \_elgg_services()->entityCache->delete($guid);
         $updated = get_entity($guid);
         $this->assertEquals('Updated Group Name', $updated->name);
 
-        elgg_call(ELGG_IGNORE_ACCESS, function() use ($updated) {
+        \elgg_call(ELGG_IGNORE_ACCESS, function() use ($updated) {
             $updated->delete();
         });
         $this->assertFalse((bool) get_entity($guid));

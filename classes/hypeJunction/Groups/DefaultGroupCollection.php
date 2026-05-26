@@ -30,7 +30,7 @@ class DefaultGroupCollection extends Collection {
 	public function getDisplayName() {
 		$identifier = $this->getPageIdentifier();
 
-		return elgg_echo("$identifier:all");
+		return \elgg_echo("$identifier:all");
 	}
 
 	/**
@@ -96,7 +96,7 @@ class DefaultGroupCollection extends Collection {
 		$identifier = $this->getPageIdentifier();
 
 		return array_merge([
-			'no_results' => elgg_echo("$identifier:none"),
+			'no_results' => \elgg_echo("$identifier:none"),
 			'full_view' => false,
 			'list_type' => 'list',
 			'list_class' => 'elgg-groups',
@@ -109,7 +109,7 @@ class DefaultGroupCollection extends Collection {
 	 * @return string
 	 */
 	public function getURL() {
-		return elgg_generate_url($this->getId());
+		return \elgg_generate_url($this->getId());
 	}
 
 	/**
@@ -138,7 +138,7 @@ class DefaultGroupCollection extends Collection {
 	 * {@inheritdoc}
 	 */
 	public function getFilterOptions() {
-		if (!elgg_is_logged_in() || $this->getCollectionType() != 'all') {
+		if (!\elgg_is_logged_in() || $this->getCollectionType() != 'all') {
 			return [];
 		}
 
@@ -166,7 +166,7 @@ class DefaultGroupCollection extends Collection {
 			$owner = $target;
 
 			if (!$owner || ($owner instanceof \ElggUser && $owner->guid != $target->guid)) {
-				$owner = elgg_get_logged_in_user_entity();
+				$owner = \elgg_get_logged_in_user_entity();
 			}
 
 			if (!$owner) {
@@ -178,7 +178,7 @@ class DefaultGroupCollection extends Collection {
 				continue;
 			}
 
-			$href = elgg_generate_url("add:$type:$subtype", [
+			$href = \elgg_generate_url("add:$type:$subtype", [
 				'container_guid' => $owner->guid,
 			]);
 
@@ -186,7 +186,7 @@ class DefaultGroupCollection extends Collection {
 				continue;
 			}
 
-			$text = elgg_echo("add:$type:$subtype");
+			$text = \elgg_echo("add:$type:$subtype");
 
 			// register the title menu item
 			$menu[] = \ElggMenuItem::factory([

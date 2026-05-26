@@ -32,7 +32,7 @@ class GroupToolsField extends Field {
 	 */
 	public function raw(Request $request, ElggEntity $entity) {
 		/* @var $entity ElggGroup */
-		$tools = elgg_get_group_tool_options($entity);
+		$tools = \elgg_get_group_tool_options($entity);
 
 		$values = [];
 
@@ -67,7 +67,7 @@ class GroupToolsField extends Field {
 	public function retrieve(ElggEntity $entity) {
 		/* @var $entity ElggGroup */
 
-		$tools = elgg_get_group_tool_options($entity);
+		$tools = \elgg_get_group_tool_options($entity);
 
 		$value = [];
 

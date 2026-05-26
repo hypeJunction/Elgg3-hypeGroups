@@ -19,15 +19,15 @@ class EntityMenu {
 		if ($entity->canEdit()) {
 			$menu->add(\ElggMenuItem::factory([
 				'name' => 'edit',
-				'text' => elgg_echo('edit'),
-				'href' => elgg_generate_url("edit:group:$entity->subtype", [
+				'text' => \elgg_echo('edit'),
+				'href' => \elgg_generate_url("edit:group:$entity->subtype", [
 					'guid' => $entity->guid,
 				]),
 				'icon' => 'pencil',
 			]));
 
 			if (!$entity->isPublicMembership()) {
-				$count = elgg_get_entities([
+				$count = \elgg_get_entities([
 					'type' => 'user',
 					'relationship' => 'membership_request',
 					'relationship_guid' => $entity->guid,
@@ -35,10 +35,10 @@ class EntityMenu {
 					'count' => true,
 				]);
 
-				$text = elgg_echo('groups:membershiprequests');
+				$text = \elgg_echo('groups:membershiprequests');
 				$title = $text;
 				if ($count) {
-					$title = elgg_echo('groups:membershiprequests:pending', [$count]);
+					$title = \elgg_echo('groups:membershiprequests:pending', [$count]);
 				}
 
 				$menu->add(\ElggMenuItem::factory([
@@ -46,7 +46,7 @@ class EntityMenu {
 					'text' => $text,
 					'badge' => $count ? $count : null,
 					'title' => $title,
-					'href' => elgg_generate_url("requests:group:$entity->subtype", [
+					'href' => \elgg_generate_url("requests:group:$entity->subtype", [
 						'guid' => $entity->guid,
 					]),
 					'icon' => 'inbox',
@@ -57,8 +57,8 @@ class EntityMenu {
 		if ($entity->canDelete()) {
 			$menu->add(\ElggMenuItem::factory([
 				'name' => 'delete',
-				'text' => elgg_echo('delete'),
-				'href' => elgg_generate_action_url('entity/delete', ['guid' => $entity->guid]),
+				'text' => \elgg_echo('delete'),
+				'href' => \elgg_generate_action_url('entity/delete', ['guid' => $entity->guid]),
 				'confirm' => true,
 				'icon' => 'trash',
 				'link_class' => 'elgg-state elgg-state-danger',
@@ -66,7 +66,7 @@ class EntityMenu {
 			]));
 		}
 
-		$user = elgg_get_logged_in_user_entity();
+		$user = \elgg_get_logged_in_user_entity();
 
 		if ($entity->isMember($user)) {
 			$leave = groups_get_group_leave_menu_item($entity, $user);

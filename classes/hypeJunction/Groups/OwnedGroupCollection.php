@@ -27,7 +27,7 @@ class OwnedGroupCollection extends DefaultGroupCollection {
 	 * {@inheritdoc}
 	 */
 	public function getURL() {
-		return elgg_generate_url($this->getId(), [
+		return \elgg_generate_url($this->getId(), [
 			'username' => $this->getTarget()->username,
 		]);
 	}
@@ -38,10 +38,10 @@ class OwnedGroupCollection extends DefaultGroupCollection {
 	public function getDisplayName() {
 		$identifier = $this->getPageIdentifier();
 
-		if ($this->getTarget()->guid == elgg_get_logged_in_user_guid()) {
-			return elgg_echo("$identifier:owned");
+		if ($this->getTarget()->guid == \elgg_get_logged_in_user_guid()) {
+			return \elgg_echo("$identifier:owned");
 		} else if ($this->getTarget()) {
-			return elgg_echo("$identifier:owned:user", [$this->getTarget()->getDisplayName()]);
+			return \elgg_echo("$identifier:owned:user", [$this->getTarget()->getDisplayName()]);
 		}
 	}
 

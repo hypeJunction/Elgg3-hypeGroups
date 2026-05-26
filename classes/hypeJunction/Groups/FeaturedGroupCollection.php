@@ -24,14 +24,14 @@ class FeaturedGroupCollection extends DefaultGroupCollection {
 	 * {@inheritdoc}
 	 */
 	public function getURL() {
-		return elgg_generate_url($this->getId());
+		return \elgg_generate_url($this->getId());
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function getDisplayName() {
-		return elgg_echo('groups:featured');
+		return \elgg_echo('groups:featured');
 	}
 
 	/**
