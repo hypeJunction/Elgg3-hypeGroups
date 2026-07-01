@@ -4,8 +4,18 @@ namespace hypeJunction\Groups;
 
 use Elgg\Event;
 
+/**
+ * Sets up group tool registrations.
+ */
 class SetupGroupTools {
 
+	/**
+	 * Filter and label group tools for a given group subtype.
+	 *
+	 * @param Event $event Group tools event
+	 *
+	 * @return \Elgg\Collections\Collection|null
+	 */
 	public function __invoke(Event $event) {
 
 		$entity = $event->getEntityParam();

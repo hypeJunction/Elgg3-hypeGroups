@@ -20,7 +20,7 @@ $subtype = $entity->getSubtype();
 if (elgg_action_exists("groups/edit/$subtype")) {
 	$action = "groups/edit/$subtype";
 } else {
-	$action = "groups/edit";
+	$action = 'groups/edit';
 }
 
 $svc = elgg()->{'posts.model'};

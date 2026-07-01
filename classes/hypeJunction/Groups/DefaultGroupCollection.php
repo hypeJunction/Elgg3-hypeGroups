@@ -10,6 +10,9 @@ use hypeJunction\Lists\Sorters\Alpha;
 use hypeJunction\Lists\Sorters\MemberCount;
 use hypeJunction\Lists\Sorters\TimeCreated;
 
+/**
+ * Default group collection (all groups).
+ */
 class DefaultGroupCollection extends Collection {
 
 	/**
@@ -162,7 +165,6 @@ class DefaultGroupCollection extends Collection {
 		$menu = [];
 
 		foreach ($subtypes as $subtype) {
-
 			$owner = $target;
 
 			if (!$owner || ($owner instanceof \ElggUser && $owner->guid != $target->guid)) {

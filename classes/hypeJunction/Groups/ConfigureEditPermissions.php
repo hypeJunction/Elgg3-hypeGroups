@@ -4,6 +4,9 @@ namespace hypeJunction\Groups;
 
 use Elgg\Event;
 
+/**
+ * Configures edit permission hooks for groups.
+ */
 class ConfigureEditPermissions {
 
 	/**

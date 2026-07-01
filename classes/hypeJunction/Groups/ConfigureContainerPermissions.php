@@ -4,6 +4,9 @@ namespace hypeJunction\Groups;
 
 use Elgg\Event;
 
+/**
+ * Configures container permission hooks for groups.
+ */
 class ConfigureContainerPermissions {
 
 	/**

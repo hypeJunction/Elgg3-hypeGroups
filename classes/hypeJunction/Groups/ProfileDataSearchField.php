@@ -4,6 +4,9 @@ namespace hypeJunction\Groups;
 
 use hypeJunction\Lists\SearchFields\SearchField;
 
+/**
+ * Profile-data search input field for groups.
+ */
 class ProfileDataSearchField extends SearchField {
 
 	/**
@@ -20,7 +23,7 @@ class ProfileDataSearchField extends SearchField {
 	 */
 	public function getField() {
 		$name = $this->getName();
-		$value = $this->getValue() ? : [];
+		$value = $this->getValue() ?: [];
 
 		$view = elgg_view('input/search/group_profile_data', [
 			'field' => $this,

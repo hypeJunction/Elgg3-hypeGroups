@@ -6,12 +6,17 @@ use Elgg\Event;
 use hypeJunction\Lists\Collection;
 use hypeJunction\Lists\CollectionInterface;
 
+/**
+ * Builds tabs for group collection pages.
+ */
 class CollectionTabs {
 
 	/**
+	 * Register collection/all menu filter tabs.
+	 *
 	 * @elgg_plugin_hook register menu:filter:collection/all
 	 *
-	 * @param Event $event
+	 * @param Event $event Menu event
 	 *
 	 * @return mixed|null
 	 */

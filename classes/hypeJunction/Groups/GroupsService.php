@@ -7,6 +7,9 @@ use Elgg\Traits\Di\ServiceFacade;
 use Elgg\Event;
 use Elgg\Values;
 
+/**
+ * Groups service used by plugin handlers.
+ */
 class GroupsService {
 
 	use ServiceFacade;
@@ -26,7 +29,7 @@ class GroupsService {
 	/**
 	 * Get subtype config
 	 *
-	 * @param string $subtype
+	 * @param string $subtype Group subtype
 	 *
 	 * @return GroupConfig|null
 	 */
@@ -109,6 +112,7 @@ class GroupsService {
 	/**
 	 * Setup group subtypes
 	 *
+	 * @return void
 	 * @throws \InvalidParameterException
 	 */
 	public function setup() {
@@ -276,7 +280,6 @@ class GroupsService {
 
 				return $value && $root;
 			});
-
 		}
 	}
 
@@ -319,7 +322,7 @@ class GroupsService {
 
 		$parts = explode('/', $path);
 
-		return array_shift($parts) ? : '';
+		return array_shift($parts) ?: '';
 	}
 
 	/**

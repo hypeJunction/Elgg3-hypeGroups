@@ -4,6 +4,9 @@ namespace hypeJunction\Groups;
 
 use hypeJunction\Lists\Filters\IsFeatured;
 
+/**
+ * Featured group collection.
+ */
 class FeaturedGroupCollection extends DefaultGroupCollection {
 
 	/**
@@ -49,5 +52,4 @@ class FeaturedGroupCollection extends DefaultGroupCollection {
 	public function getListOptions(array $options = []) {
 		return parent::getListOptions($options);
 	}
-
 }

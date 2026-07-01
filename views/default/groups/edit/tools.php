@@ -17,7 +17,7 @@ if (!empty($tools)) {
 	});
 
 	foreach ($tools as $group_option) {
-		$group_option_toggle_name = $group_option->name . "_enable";
+		$group_option_toggle_name = $group_option->name . '_enable';
 		$value = elgg_extract($group_option_toggle_name, $vars);
 
 		$fields[] = [

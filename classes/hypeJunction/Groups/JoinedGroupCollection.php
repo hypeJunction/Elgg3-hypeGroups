@@ -4,6 +4,9 @@ namespace hypeJunction\Groups;
 
 use hypeJunction\Lists\Filters\IsMember;
 
+/**
+ * Collection of groups the user has joined.
+ */
 class JoinedGroupCollection extends DefaultGroupCollection {
 
 	/**
@@ -32,7 +35,6 @@ class JoinedGroupCollection extends DefaultGroupCollection {
 		]);
 	}
 
-
 	/**
 	 * {@inheritdoc}
 	 */
@@ -54,5 +56,4 @@ class JoinedGroupCollection extends DefaultGroupCollection {
 
 		return parent::getQueryOptions($options);
 	}
-
 }

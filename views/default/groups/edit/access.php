@@ -88,7 +88,7 @@ if ($entity && $entity->guid && ($owner_guid == elgg_get_logged_in_user_guid() |
 		'match_on' => 'group_members',
 		'name' => 'owner_guid',
 		'id' => 'groups-owner-guid',
-		'value' =>  $owner_guid,
+		'value' => $owner_guid,
 		'multiple' => false,
 		'limit' => 1,
 		'options' => [

@@ -4,12 +4,17 @@ namespace hypeJunction\Groups;
 
 use Elgg\Event;
 
+/**
+ * Builds tabs on the groups index page.
+ */
 class GroupsTabs {
 
 	/**
+	 * Register groups/all menu filter tabs.
+	 *
 	 * @elgg_plugin_hook register menu:filter:groups/all
 	 *
-	 * @param Event $event
+	 * @param Event $event Menu event
 	 *
 	 * @return mixed|null
 	 */

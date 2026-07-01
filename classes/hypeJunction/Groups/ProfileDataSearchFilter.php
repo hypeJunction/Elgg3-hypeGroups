@@ -6,8 +6,10 @@ use Elgg\Database\Clauses\WhereClause;
 use Elgg\Database\QueryBuilder;
 use hypeJunction\Lists\FilterInterface;
 
+/**
+ * Profile-data search filter for groups.
+ */
 class ProfileDataSearchFilter implements FilterInterface {
-
 
 	/**
 	 * Returns ID of the filter

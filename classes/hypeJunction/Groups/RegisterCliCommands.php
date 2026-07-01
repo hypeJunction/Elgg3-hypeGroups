@@ -4,6 +4,9 @@ namespace hypeJunction\Groups;
 
 use Elgg\Event;
 
+/**
+ * Registers CLI commands provided by this plugin.
+ */
 class RegisterCliCommands {
 
 	/**

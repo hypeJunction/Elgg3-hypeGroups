@@ -9,7 +9,7 @@ $group_guid = (int) get_input('group_guid');
 
 elgg_entity_gatekeeper($group_guid, 'group');
 
-elgg_set_http_header("Content-Type: application/json;charset=utf-8");
+elgg_set_http_header('Content-Type: application/json;charset=utf-8');
 
 $options = [
 	'query' => $query,

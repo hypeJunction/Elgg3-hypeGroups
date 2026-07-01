@@ -15,6 +15,9 @@ use hypeJunction\Fields\TitleField;
 use hypeJunction\ValidationException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * Sets/refines group profile field configuration.
+ */
 class SetGroupFields {
 
 	/**
